@@ -8,7 +8,6 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/core/config"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
-	"github.com/hyperledger/fabric-sdk-go/pkg/util/pathvar"
 	"log"
 	"strings"
 )
@@ -32,7 +31,7 @@ func InitChainBrowserService(){
 	log.Println("============ 初始化区块浏览器服务 ============")
 	//获取fabsdk
 	var err error
-	ConfigBackend := config.FromFile(pathvar.Subst(chainBrowserConfigPath))
+	ConfigBackend := config.FromFile(chainBrowserConfigPath)
 	mainSDK, err = fabsdk.New(ConfigBackend)
 	if err != nil {
 		panic(fmt.Sprintf("Failed to create new SDK: %s", err))
