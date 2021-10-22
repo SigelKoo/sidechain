@@ -24,7 +24,6 @@ func main() {
 	// init sdk env info
 	info := sdkInit.SdkEnvInfo{
 		ChannelID:        "mychannel",
-		ChannelConfig:    "./fixtures/channel-artifacts/channel.tx",
 		Orgs:             orgs,
 		OrdererAdminUser: "Admin",
 		OrdererOrgName:   "OrdererOrg",
@@ -32,7 +31,7 @@ func main() {
 	}
 
 	// sdk setup
-	sdk, err := sdkInit.Setup("config.yaml", &info)
+	sdk, err := sdkInit.Setup("./config/crypto-config.yaml", &info)
 	if err != nil {
 		fmt.Println(">> SDK setup error:", err)
 		os.Exit(-1)
