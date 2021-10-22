@@ -13,7 +13,6 @@ type Block struct {
 	TransactionList		 []*Transaction   `json:"transactionList"` //交易列表
 	CreateTime			 string   `json:"createTime"` //区块生成时间
 }
-
 type Transaction struct {
 	TransactionActionList		 []*TransactionAction   `json:"transactionActionList"` //交易列表
 }

@@ -4,5 +4,5 @@ import sidechain "sidechain/src"
 
 func main() {
 	sidechain.InitChainBrowserService()
-	sidechain.QueryLedgerInfo()
+	sidechain.QueryLatestBlocksInfo()
 }

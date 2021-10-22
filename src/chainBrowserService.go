@@ -4,11 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/ledger"
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
+	providersFab "github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
 	"github.com/hyperledger/fabric-sdk-go/pkg/core/config"
+	"github.com/hyperledger/fabric-sdk-go/pkg/fab"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 	"github.com/hyperledger/fabric-sdk-go/pkg/util/pathvar"
 	"log"
+	"strings"
 )
 
 //区块链浏览器服务
@@ -17,20 +19,16 @@ var ledgerClient *ledger.Client
 
 const (
 	org1Name      = "Org1"
-	org2Name      = "Org2"
 	org1Peer0 	  = "peer0.org1.example.com"
 	org1AdminUser = "Admin"
-	org2AdminUser = "Admin"
 	org1User      = "User1"
-	org2User      = "User1"
 	channelID     = "mychannel"
-	linuxConfigPath = "../config/crypto-config.yaml"
+	configPath = "config.yaml"
 )
-
-var chainBrowserConfigPath = linuxConfigPath
+var chainBrowserConfigPath = configPath
 
 //初始化区块浏览器SDK
-func InitChainBrowserService() {
+func InitChainBrowserService(){
 	log.Println("============ 初始化区块浏览器服务 ============")
 	//获取fabsdk
 	var err error
@@ -48,27 +46,57 @@ func InitChainBrowserService() {
 	}
 }
 
+
 //查询账本信息
-func QueryLedgerInfo() (*fab.BlockchainInfoResponse,error) {
+func QueryLedgerInfo() (*providersFab.BlockchainInfoResponse,error){
 	ledgerInfo, err := ledgerClient.QueryInfo()
 	if err != nil {
 		fmt.Printf("QueryInfo return error: %s", err)
 		return nil, err
 	}
+	QueryPeerConfig(ledgerInfo)
 	return ledgerInfo,nil
 }
 
-//查询最新5个区块信息
+//查询节点信息
+func QueryPeerConfig(ledgerInfo *providersFab.BlockchainInfoResponse) (*providersFab.EndpointConfig, error){
+	sdk := mainSDK
+	configBackend, err := sdk.Config()
+	if err != nil {
+		fmt.Println("failed to get config backend, error: %s", err)
+	}
+
+	endpointConfig, err := fab.ConfigFromBackend(configBackend)
+	if err != nil {
+		fmt.Println("failed to get endpoint config, error: %s", err)
+	}
+
+	expectedPeerConfig1, _ := endpointConfig.PeerConfig("peer0.org1.example.com")
+	fmt.Println("Unable to fetch Peer config for %s", "peer0.org1.example.com")
+	expectedPeerConfig2, _ := endpointConfig.PeerConfig("peer1.org1.example.com")
+	fmt.Println("Unable to fetch Peer config for %s", "peer1.org1.example.com")
+
+	if !strings.Contains(ledgerInfo.Endorser, expectedPeerConfig1.URL) && !strings.Contains(ledgerInfo.Endorser, expectedPeerConfig2.URL) {
+		fmt.Println("Expecting %s or %s, got %s", expectedPeerConfig1.URL, expectedPeerConfig2.URL, ledgerInfo.Endorser)
+	}
+
+	return &endpointConfig, nil
+}
+
+//查询最新10个区块信息
 func QueryLatestBlocksInfo() ([]*Block,error){
 	ledgerInfo, err := ledgerClient.QueryInfo()
 	if err != nil {
 		fmt.Printf("QueryLatestBlocksInfo return error: %s\n", err)
 		return nil, err
 	}
-	latestBlockList :=[]*Block{}
-	lastetBlockNum :=ledgerInfo.BCI.Height-1
-
-	for i:=lastetBlockNum;i>0&&i>(lastetBlockNum-5);i--{
+	latestBlockList := []*Block{}
+	lastetBlockNum := ledgerInfo.BCI.Height-1
+	minBlockNum := 1
+	if lastetBlockNum > 10 {
+		minBlockNum = int(lastetBlockNum - 10)
+	}
+	for i:=lastetBlockNum;i>0&&int(i)>minBlockNum;i--{
 		block,err :=QueryBlockByBlockNumber(int64(i))
 		if err != nil {
 			fmt.Printf("QueryLatestBlocksInfo return error: %s", err)
@@ -78,7 +106,6 @@ func QueryLatestBlocksInfo() ([]*Block,error){
 	}
 	return latestBlockList,nil
 }
-
 func QueryLatestBlocksInfoJsonStr()(string,error){
 	blockList,err:=QueryLatestBlocksInfo()
 	jsonStr,err :=json.Marshal(blockList)
@@ -112,6 +139,8 @@ func QueryBlockByBlockNumber(num int64) (*Block,error){
 		txList= append(txList,transaction)
 	}
 
+
+
 	block :=Block{
 		Number:       rawBlock.Header.Number,
 		PreviousHash: rawBlock.Header.PreviousHash,
@@ -125,9 +154,10 @@ func QueryBlockByBlockNumber(num int64) (*Block,error){
 	return &block,nil
 }
 
+
 //查询交易信息
 func QueryTransactionByTxId(txId string) (*Transaction,error){
-	rawTx,err :=ledgerClient.QueryTransaction(fab.TransactionID(txId))
+	rawTx,err :=ledgerClient.QueryTransaction(providersFab.TransactionID(txId))
 	if err != nil {
 		fmt.Printf("QueryBlock return error: %s", err)
 		return nil, err
@@ -138,7 +168,7 @@ func QueryTransactionByTxId(txId string) (*Transaction,error){
 		fmt.Printf("QueryBlock return error: %s", err)
 		return nil, err
 	}
-	block,err :=ledgerClient.QueryBlockByTxID(fab.TransactionID(txId))
+	block,err :=ledgerClient.QueryBlockByTxID(providersFab.TransactionID(txId))
 	if err != nil {
 		fmt.Printf("QueryBlock return error: %s", err)
 		return nil, err
@@ -148,7 +178,6 @@ func QueryTransactionByTxId(txId string) (*Transaction,error){
 	}
 	return transaction,nil
 }
-
 func QueryTransactionByTxIdJsonStr(txId string) (string,error){
 	transaction,err:=QueryTransactionByTxId(txId)
 	if err!=nil{
@@ -157,5 +186,3 @@ func QueryTransactionByTxIdJsonStr(txId string) (string,error){
 	jsonStr,err :=json.Marshal(transaction)
 	return string(jsonStr),err
 }
-
-
