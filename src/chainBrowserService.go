@@ -23,7 +23,7 @@ const (
 	org1AdminUser = "Admin"
 	org1User      = "User1"
 	channelID     = "mychannel"
-	configPath = "config.yaml"
+	configPath = "../config/crypto-config.yaml"
 )
 var chainBrowserConfigPath = configPath
 
