@@ -70,8 +70,8 @@ github.com/hyperledger/fabric-lib-go v1.0.0 h1:UL1w7c9LvHZUSkIvHTDGklxFv2kTeva1Q
 github.com/hyperledger/fabric-lib-go v1.0.0/go.mod h1:H362nMlunurmHwkYqR5uHL2UDWbQdbfz74n8kbCFsqc=
 github.com/hyperledger/fabric-protos-go v0.0.0-20200424173316-dd554ba3746e/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
 github.com/hyperledger/fabric-protos-go v0.0.0-20200707132912-fee30f3ccd23/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
-github.com/hyperledger/fabric-protos-go v0.0.0-20211006172752-14f4318ce71c h1:kbXDwJfMliHxkIF+wQu0PgS7MlrhoQi7TzAKd28Iaes=
-github.com/hyperledger/fabric-protos-go v0.0.0-20211006172752-14f4318ce71c/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
+github.com/hyperledger/fabric-protos-go v0.0.0-20210318103044-13fdee960194 h1:orJqC5I8O/pUGWBwlyxEFfJh7WdbvqNd4mLdLWyghIo=
+github.com/hyperledger/fabric-protos-go v0.0.0-20210318103044-13fdee960194/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
 github.com/hyperledger/fabric-sdk-go v1.0.0 h1:NRu0iNbHV6u4nd9jgYghAdA1Ll4g0Sri4hwMEGiTbyg=
 github.com/hyperledger/fabric-sdk-go v1.0.0/go.mod h1:qWE9Syfg1KbwNjtILk70bJLilnmCvllIYFCSY/pa1RU=
 github.com/jessevdk/go-flags v1.4.0/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
