@@ -37,7 +37,8 @@ func InitChainBrowserService(){
 		panic(fmt.Sprintf("Failed to create new SDK: %s", err))
 	}
 	//获取context
-	org1AdminChannelContext := mainSDK.ChannelContext(channelID, fabsdk.WithUser(org1AdminUser), fabsdk.WithOrg(org1Name))
+	org1AdminChannelContext := mainSDK.ChannelContext(channelID, fabsdk.WithUser(org1User), fabsdk.WithOrg(org1Name))
+	// org1AdminChannelContext := mainSDK.ChannelContext(channelID, fabsdk.WithUser(org1AdminUser), fabsdk.WithOrg(org1Name))
 	//Ledger client
 	ledgerClient, err = ledger.New(org1AdminChannelContext)
 	if err != nil {
