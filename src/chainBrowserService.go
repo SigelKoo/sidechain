@@ -104,7 +104,7 @@ func QueryLatestBlocksInfo() ([]*Block,error){
 		}
 		latestBlockList = append(latestBlockList,block)
 	}
-	fmt.Println("end")
+	fmt.Println(lastetBlockNum)
 	return latestBlockList,nil
 }
 func QueryLatestBlocksInfoJsonStr()(string,error){
