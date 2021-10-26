@@ -35,7 +35,10 @@ func ContractDeploy(url string, privateString string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	auth := bind.NewKeyedTransactor(privateKey)
+	auth, err := bind.NewKeyedTransactorWithChainID(privateKey, new(big.Int).SetUint64(uint64(57825)))
+	if err != nil {
+		log.Fatal(err)
+	}
 	auth.Nonce = big.NewInt(int64(nonce))
 	auth.Value = big.NewInt(0)
 	auth.GasLimit = uint64(300000)
