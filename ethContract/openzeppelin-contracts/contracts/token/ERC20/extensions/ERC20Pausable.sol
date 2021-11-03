@@ -2,8 +2,8 @@
 
 pragma solidity ^0.8.0;
 
-import "./ERC20.sol";
-import "../../utils/Pausable.sol";
+import "../ERC20.sol";
+import "../../../security/Pausable.sol";
 
 /**
  * @dev ERC20 token with pausable token transfers, minting and burning.
@@ -20,7 +20,11 @@ abstract contract ERC20Pausable is ERC20, Pausable {
      *
      * - the contract must not be paused.
      */
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override {
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual override {
         super._beforeTokenTransfer(from, to, amount);
 
         require(!paused(), "ERC20Pausable: token transfer while paused");
