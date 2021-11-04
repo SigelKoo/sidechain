@@ -699,6 +699,7 @@ type ERC20Transfer struct {
 	Raw   types.Log // Blockchain specific contextual infos
 }
 
+
 // FilterTransfer is a free log retrieval operation binding the contract event 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef.
 //
 // Solidity: event Transfer(address indexed from, address indexed to, uint256 value)
