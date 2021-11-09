@@ -19,17 +19,17 @@ func RegisterUser(username, org, passwd string) {
 		fmt.Println("failed to create msp client")
 		return
 	}
-	identity, err := mspClient.CreateIdentity(
-		&msp.IdentityRequest{
-			ID: username,
-			Affiliation: org,
-			Attributes: []msp.Attribute{{Name: "ethereum", Value: username}},
-		})
-	if err != nil {
-		fmt.Printf("Create identity return error %s\n", err)
-		return
-	}
-	fmt.Printf("identity '%s' created\n", identity.ID)
+	//identity, err := mspClient.CreateIdentity(
+	//	&msp.IdentityRequest{
+	//		ID: username,
+	//		Affiliation: org,
+	//		Attributes: []msp.Attribute{{Name: "ethereum", Value: username}},
+	//	})
+	//if err != nil {
+	//	fmt.Printf("Create identity return error %s\n", err)
+	//	return
+	//}
+	//fmt.Printf("identity '%s' created\n", identity.ID)
 	err = mspClient.Enroll(username, msp.WithSecret(passwd))
 	if err != nil {
 		fmt.Printf("failed to enroll user: %s\n", err)
