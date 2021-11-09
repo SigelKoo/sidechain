@@ -7,7 +7,7 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 )
 
-func registerUser(username, org, passwd string) {
+func RegisterUser(username, org, passwd string) {
 	sdk, err := fabsdk.New(config.FromFile("/home/gopath/sidechain/config/crypto-config.yaml"))
 	if err != nil {
 		fmt.Println("failed to create new SDK")
