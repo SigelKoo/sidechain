@@ -11,7 +11,7 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 	"log"
 	"math/big"
-	ethContract "sidechain/ethContract"
+	ethContract "sidechain/ethSDK"
 	"strings"
 )
 

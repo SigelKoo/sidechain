@@ -1,4 +1,4 @@
-package ethContract
+package ethSDK
 
 import (
 	"context"
@@ -8,11 +8,11 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 	"math/big"
-	store "sidechain/ethContract/contracts"
+	"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 )
 
 func ContractDeploy(url string, privateString string) string {
-	// "2e8749fd1ba7a42586d2bb38c10fab2e8845abd7733378a95a03fdcdbd1b854e"
+	// store "2e8749fd1ba7a42586d2bb38c10fab2e8845abd7733378a95a03fdcdbd1b854e"
 	client, err := ethclient.Dial(url)
 	if err != nil {
 		log.Fatal(err)
@@ -43,7 +43,8 @@ func ContractDeploy(url string, privateString string) string {
 	auth.Value = big.NewInt(0)
 	auth.GasLimit = uint64(300000)
 	auth.GasPrice = gasPrice
-	address, tx, _, err := store.DeployStore(auth, client)
+	// address, tx, _, err := store.DeployStore(auth, client)
+	address, tx, _, err := ERC20.DeployERC20(auth, client, "SidechainCoin", "sc")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,4 +1,4 @@
-package ethContract
+package ethSDK
 
 import (
 	"context"
