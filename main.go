@@ -15,8 +15,8 @@ import (
 const (
 	mspID        = "Org2MSP"
 	cryptoPath   = "../../fabric-samples/test-network/organizations/peerOrganizations/org2.example.com"
-	certPath     = cryptoPath + "/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org1.example.com/msp/signcerts/cert.pem"
-	keyPath      = cryptoPath + "/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org1.example.com/msp/keystore/152b9af6ac6b95478496c0b7a23665a956d864b9303dc6e1770c8fee3d760d13_sk"
+	certPath     = cryptoPath + "/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com/msp/signcerts/cert.pem"
+	keyPath      = cryptoPath + "/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com/msp/keystore/152b9af6ac6b95478496c0b7a23665a956d864b9303dc6e1770c8fee3d760d13_sk"
 	tlsCertPath  = cryptoPath + "/peers/peer0.org2.example.com/tls/ca.crt"
 	peerEndpoint = "localhost:9051"
 )
