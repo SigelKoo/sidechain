@@ -9,12 +9,12 @@ import (
 )
 
 func main() {
-	initInfo := fabricSDK.InitInfo {
+	initInfo := fabricSDK.InitInfo{
 		ChannelID:     "mychannel",
 		ChannelConfig: "/home/fabric-samples/test-network/channel-artifacts/mychannel.block",
 
 		OrgAdmin:       "Admin",
-		OrgName:        "org2.example.com",
+		OrgName:        "Org2",
 		OrdererOrgName: "orderer.example.com",
 
 		ChaincodeID:     "token_erc20",
@@ -40,7 +40,7 @@ func main() {
 		Client:      channelClient,
 	}
 	recipient := "eDUwOTo6Q049MHg0MTZiMWU1MzI5QmQ5N0JCNzA0ODY2YkQ0ODk3NDdiMjY4NDhmQTQyLE9VPWNsaWVudCxPPUh5cGVybGVkZ2VyLFNUPU5vcnRoIENhcm9saW5hLEM9VVM6OkNOPWNhLm9yZzIuZXhhbXBsZS5jb20sTz1vcmcyLmV4YW1wbGUuY29tLEw9SHVyc2xleSxTVD1IYW1wc2hpcmUsQz1VSw=="
-	msg, err := serviceSetup.Transfer(recipient,"1")
+	msg, err := serviceSetup.Transfer(recipient, "1")
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
