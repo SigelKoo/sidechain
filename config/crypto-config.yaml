@@ -79,9 +79,13 @@ organizations:
       - peer1.org2.example.com
     users:
       0x416b1e5329Bd97BB704866bD489747b26848fA42:
+        key:
+          path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0x416b1e5329Bd97BB704866bD489747b26848fA42@org2.example.com/msp/keystore/12a834f3f7725b064ec6fc819289088028a2d062153e710b9853f138703f8f24_sk
         cert:
           path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0x416b1e5329Bd97BB704866bD489747b26848fA42@org2.example.com/msp/signcerts/cert.pem
       0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c:
+        key:
+          path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com/msp/keystore/152b9af6ac6b95478496c0b7a23665a956d864b9303dc6e1770c8fee3d760d13_sk
         cert:
           path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com/msp/signcerts/cert.pem
     certificateAuthorities:
