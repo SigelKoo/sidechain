@@ -97,7 +97,7 @@ orderers:
       allow-insecure: false
 
     tlsCACerts:
-      path: /home/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+      path: /home/fabric-samples/test-network/organizations/ordererOrganizations/example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 peers:
   peer0.org1.example.com:
