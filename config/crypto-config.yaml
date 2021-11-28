@@ -1,15 +1,13 @@
 version: 1.0.0
 
 client:
-  organization: Org1
+  organization: Org2
   logging:
     level: info
   cryptoconfig:
-    path: /home/testClientForFabric230/test-network/organizations/cryptogen/crypto-config-org1.yaml
-
+    path: /home/fabric-samples/test-network/organizations/cryptogen/crypto-config-org2.yaml
   credentialStore:
     path: "/tmp/examplestore"
-
   BCCSP:
     security:
       enabled: true
@@ -18,16 +16,16 @@ client:
       hashAlgorithm: "SHA2"
       softVerify: true
       level: 256
-
   tlsCerts:
     systemCertPool: true
     client:
-      keyfile: /home/testClientForFabric230/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/tls/client.key
-      certfile: /home/testClientForFabric230/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/tls/client.crt
-
+      keyfile: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com/tls/client.key
+      certfile: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com/tls/client.crt
 
 channels:
   mychannel:
+    orderers:
+      - orderer.example.com
     peers:
       peer0.org1.example.com:
         endorsingPeer: true
@@ -66,7 +64,7 @@ channels:
 organizations:
   Org1:
     mspid: Org1MSP
-    cryptoPath: /home/testClientForFabric230/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp
+    cryptoPath: /home/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp
     peers:
       - peer0.org1.example.com
       - peer1.org1.example.com
@@ -75,7 +73,7 @@ organizations:
 
   Org2:
     mspid: Org2MSP
-    cryptoPath: /home/testClientForFabric230/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp
+    cryptoPath: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp
     peers:
       - peer0.org2.example.com
       - peer1.org2.example.com
@@ -84,12 +82,12 @@ organizations:
 
   ordererorg:
     mspID: OrdererMSP
-    cryptoPath: /home/testClientForFabric230/test-network/organizations/ordererOrganizations/example.com/users/Admin@example.com/msp
+    cryptoPath: /home/fabric-samples/test-network/organizations/ordererOrganizations/example.com/users/Admin@example.com/msp
 
 
 orderers:
   orderer.example.com:
-    url: grpcs://192.168.132.65:7050
+    url: grpcs://localhost:7050
     grpcOptions:
       ssl-target-name-override: orderer.example.com
       keep-alive-time: 0s
@@ -99,37 +97,11 @@ orderers:
       allow-insecure: false
 
     tlsCACerts:
-      path: /home/testClientForFabric230/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
-
-  orderer2.example.com:
-    url: grpcs://192.168.132.66:8050
-    grpcOptions:
-      ssl-target-name-override: orderer2.example.com
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      keep-alive-permit: false
-      fail-fast: false
-      allow-insecure: false
-
-    tlsCACerts:
-      path: /home/testClientForFabric230/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
-
-  orderer3.example.com:
-    url: grpcs://192.168.132.67:9050
-    grpcOptions:
-      ssl-target-name-override: orderer3.example.com
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      keep-alive-permit: false
-      fail-fast: false
-      allow-insecure: false
-
-    tlsCACerts:
-      path: /home/testClientForFabric230/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+      path: /home/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
 
 peers:
   peer0.org1.example.com:
-    url: 192.168.132.65:7051
+    url: localhost:7051
     grpcOptions:
       ssl-target-name-override: peer0.org1.example.com
       keep-alive-time: 0s
@@ -139,10 +111,10 @@ peers:
       allow-insecure: false
 
     tlsCACerts:
-      path: /home/testClientForFabric230/test-network/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
+      path: /home/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
 
   peer1.org1.example.com:
-    url: 192.168.132.66:8051
+    url: localhost:8051
     grpcOptions:
       ssl-target-name-override: peer1.org1.example.com
       keep-alive-time: 0s
@@ -152,10 +124,10 @@ peers:
       allow-insecure: false
 
     tlsCACerts:
-      path: /home/testClientForFabric230/test-network/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
+      path: /home/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
 
   peer0.org2.example.com:
-    url: 192.168.132.67:9051
+    url: localhost:9051
     grpcOptions:
       ssl-target-name-override: peer0.org2.example.com
       keep-alive-time: 0s
@@ -165,10 +137,10 @@ peers:
       allow-insecure: false
 
     tlsCACerts:
-      path: /home/testClientForFabric230/test-network/organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
+      path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
 
   peer1.org2.example.com:
-    url: 192.168.132.68:10051
+    url: localhost:10051
     grpcOptions:
       ssl-target-name-override: peer1.org2.example.com
       keep-alive-time: 0s
@@ -178,40 +150,32 @@ peers:
       allow-insecure: false
 
     tlsCACerts:
-      path: /home/testClientForFabric230/test-network/organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
+      path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
 
 entitymatchers:
   peer:
     - pattern: (\w*)peer0.org1.example.com(\w*)
-      urlsubstitutionexp: 192.168.132.65:7051
+      urlsubstitutionexp: grpcs://localhost:7051
       ssltargetoverrideurlsubstitutionexp: peer0.org1.example.com
       mappedhost: peer0.org1.example.com
 
     - pattern: (\w*)peer1.org1.example.com(\w*)
-      urlsubstitutionexp: 192.168.132.66:8051
+      urlsubstitutionexp: grpcs://localhost:8051
       ssltargetoverrideurlsubstitutionexp: peer1.org1.example.com
       mappedhost: peer1.org1.example.com
 
     - pattern: (\w*)peer0.org2.example.com(\w*)
-      urlsubstitutionexp: 192.168.132.67:9051
+      urlsubstitutionexp: grpcs://localhost:9051
       ssltargetoverrideurlsubstitutionexp: peer0.org2.example.com
       mappedhost: peer0.org2.example.com
 
     - pattern: (\w*)peer1.org2.example.com(\w*)
-      urlsubstitutionexp: 192.168.132.68:10051
+      urlsubstitutionexp: grpcs://localhost:10051
       ssltargetoverrideurlsubstitutionexp: peer1.org2.example.com
       mappedhost: peer1.org2.example.com
 
   orderer:
     - pattern: (\w*)orderer.example.com(\w*)
-      urlsubstitutionexp: 192.168.132.65:7050
+      urlsubstitutionexp: grpcs://localhost:7050
       ssltargetoverrideurlsubstitutionexp: orderer.example.com
       mappedhost: orderer.example.com
-    - pattern: (\w*)orderer2.example.com(\w*)
-      urlsubstitutionexp: 192.168.132.66:8050
-      ssltargetoverrideurlsubstitutionexp: orderer2.example.com
-      mappedhost: orderer2.example.com
-    - pattern: (\w*)orderer3.example.com(\w*)
-      urlsubstitutionexp: 192.168.132.67:9050
-      ssltargetoverrideurlsubstitutionexp: orderer3.example.com
-      mappedhost: orderer3.example.com
