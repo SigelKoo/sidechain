@@ -20,7 +20,7 @@ func main() {
 		ChaincodeID:     "token_erc20",
 		ChaincodeGoPath: os.Getenv("GOPATH"),
 		ChaincodePath:   "/home/fabric-samples/token-erc-20/chaincode-go",
-		UserName:        "0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com",
+		UserName:        "0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c",
 	}
 
 	sdk, err := fabricSDK.SetupSDK("./config/crypto-config.yaml", false)
