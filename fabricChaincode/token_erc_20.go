@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
+	"sidechain/fabricChaincode/chaincode"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
-	"github.com/hyperledger/fabric-samples/token-erc-20/chaincode-go/chaincode"
 )
 
 func main() {
