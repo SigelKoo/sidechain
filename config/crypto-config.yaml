@@ -98,7 +98,7 @@ organizations:
 
 orderers:
   orderer.example.com:
-    url: grpcs://localhost:7050
+    url: localhost:7050
     grpcOptions:
       ssl-target-name-override: orderer.example.com
       keep-alive-time: 0s
@@ -166,27 +166,27 @@ peers:
 entitymatchers:
   peer:
     - pattern: (\w*)peer0.org1.example.com(\w*)
-      urlsubstitutionexp: grpcs://localhost:7051
+      urlsubstitutionexp: localhost:7051
       ssltargetoverrideurlsubstitutionexp: peer0.org1.example.com
       mappedhost: peer0.org1.example.com
 
     - pattern: (\w*)peer1.org1.example.com(\w*)
-      urlsubstitutionexp: grpcs://localhost:8051
+      urlsubstitutionexp: localhost:8051
       ssltargetoverrideurlsubstitutionexp: peer1.org1.example.com
       mappedhost: peer1.org1.example.com
 
     - pattern: (\w*)peer0.org2.example.com(\w*)
-      urlsubstitutionexp: grpcs://localhost:9051
+      urlsubstitutionexp: localhost:9051
       ssltargetoverrideurlsubstitutionexp: peer0.org2.example.com
       mappedhost: peer0.org2.example.com
 
     - pattern: (\w*)peer1.org2.example.com(\w*)
-      urlsubstitutionexp: grpcs://localhost:10051
+      urlsubstitutionexp: localhost:10051
       ssltargetoverrideurlsubstitutionexp: peer1.org2.example.com
       mappedhost: peer1.org2.example.com
 
   orderer:
     - pattern: (\w*)orderer.example.com(\w*)
-      urlsubstitutionexp: grpcs://localhost:7050
+      urlsubstitutionexp: localhost:7050
       ssltargetoverrideurlsubstitutionexp: orderer.example.com
       mappedhost: orderer.example.com
