@@ -12,7 +12,6 @@ import (
 )
 
 func ContractDeploy(url string, privateString string) string {
-	// store "2e8749fd1ba7a42586d2bb38c10fab2e8845abd7733378a95a03fdcdbd1b854e"
 	client, err := ethclient.Dial(url)
 	if err != nil {
 		log.Fatal(err)
@@ -44,7 +43,7 @@ func ContractDeploy(url string, privateString string) string {
 	auth.GasLimit = uint64(300000)
 	auth.GasPrice = gasPrice
 	// address, tx, _, err := store.DeployStore(auth, client)
-	address, tx, _, err := ERC20.DeployERC20(auth, client, "SidechainCoin", "sc")
+	address, tx, _, err := ERC20.DeployERC20(auth, client, "token_erc20", "erc20")
 	if err != nil {
 		log.Fatal(err)
 	}
