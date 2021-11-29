@@ -20,22 +20,31 @@ func (t *ServiceSetup) Transfer(recipient string, amount string) (string, error)
 	return string(respone.TransactionID), nil
 }
 
-func (t *ServiceSetup) BalanceOf(account string) ([]byte, error) {
+func (t *ServiceSetup) BalanceOf(account string) (string, error) {
 	req := channel.Request{ChaincodeID: t.ChaincodeID, Fcn: "BalanceOf", Args: [][]byte{[]byte(account)}}
 	respone, err := t.Client.Query(req)
 	if err != nil {
-		return []byte{0x00}, err
+		return "", err
 	}
-	return respone.Payload, nil
+	return string(respone.Payload), nil
 }
 
-func (t *ServiceSetup) ClientAccountBalance() ([]byte, error) {
+func (t *ServiceSetup) ClientAccountBalance() (string, error) {
 	req := channel.Request{ChaincodeID: t.ChaincodeID, Fcn: "ClientAccountBalance"}
 	respone, err := t.Client.Query(req)
 	if err != nil {
-		return []byte{0x00}, err
+		return "", err
 	}
-	return respone.Payload, nil
+	return string(respone.Payload), nil
+}
+
+func (t *ServiceSetup) ClientAccountID() (string, error) {
+	req := channel.Request{ChaincodeID: t.ChaincodeID, Fcn: "ClientAccountID"}
+	respone, err := t.Client.Query(req)
+	if err != nil {
+		return "", err
+	}
+	return string(respone.Payload), nil
 }
 
 func (t *ServiceSetup) Mint(amount string) (string, error) {
