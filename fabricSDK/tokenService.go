@@ -5,7 +5,7 @@ import (
 )
 
 func (t *ServiceSetup) Transfer(recipient string, amount string) (string, error) {
-	eventID := "eventTransfer"
+	eventID := "Transfer"
 	reg, notifier := regitserEvent(t.Client, t.ChaincodeID, eventID)
 	defer t.Client.UnregisterChaincodeEvent(reg)
 	req := channel.Request{ChaincodeID: t.ChaincodeID, Fcn: "Transfer", Args: [][]byte{[]byte(recipient), []byte(amount)}}
