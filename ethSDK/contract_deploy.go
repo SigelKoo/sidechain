@@ -34,7 +34,7 @@ func ContractDeploy(url string, privateString string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	auth, err := bind.NewKeyedTransactorWithChainID(privateKey, new(big.Int).SetUint64(uint64(57825)))
+	auth, err := bind.NewKeyedTransactorWithChainID(privateKey, new(big.Int).SetUint64(uint64(686868)))
 	if err != nil {
 		log.Fatal(err)
 	}
