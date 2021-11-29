@@ -71,6 +71,13 @@ func main() {
 		fmt.Println("client1，账户余额为：" + client1Balance)
 	}
 
+	client1ID, err := client1ServiceSetup.ClientAccountID()
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		fmt.Println("client1，交易id为：" + client1ID)
+	}
+
 	client2ID, err := client2ServiceSetup.ClientAccountID()
 	if err != nil {
 		fmt.Println(err.Error())
@@ -85,7 +92,7 @@ func main() {
 		fmt.Println("转账成功，交易编号为：" + msg)
 	}
 
-	client1Balance, err = client2ServiceSetup.BalanceOf(Org2User1Info.UserName)
+	client1Balance, err = client2ServiceSetup.BalanceOf(client1ID)
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
