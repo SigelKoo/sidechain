@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 	"math/big"
-	"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
+	//"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 )
 
 func ContractDeploy(url string, privateString string) string {
@@ -42,10 +42,10 @@ func ContractDeploy(url string, privateString string) string {
 	auth.Value = big.NewInt(0)
 	auth.GasLimit = uint64(300000)
 	auth.GasPrice = gasPrice
-	// address, tx, _, err := store.DeployStore(auth, client)
-	address, tx, _, err := ERC20.DeployERC20(auth, client, "token_erc20", "erc20")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return address.Hex() + " " + tx.Hash().Hex()
+	//address, tx, _, err := ERC20.DeployERC20(auth, client, "token_erc20", "erc20")
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//return address.Hex() + " " + tx.Hash().Hex()
+	return ""
 }
