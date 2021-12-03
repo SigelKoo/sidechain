@@ -10,21 +10,21 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 	"math/big"
-	token "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
+	"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 	"strings"
 )
 
 // 现在在我们的Go应用程序中，让我们创建与ERC-20事件日志签名类型相匹配的结构类型：
 type LogTransfer struct {
-	From common.Address
-	To common.Address
+	From  common.Address
+	To    common.Address
 	Value *big.Int
 }
 
 type LogApproval struct {
 	TokenOwner common.Address
-	Spender common.Address
-	Value *big.Int
+	Spender    common.Address
+	Value      *big.Int
 }
 
 // 读取ERC-20代币的事件日志
@@ -38,7 +38,7 @@ func eventListenERC20(url string, address string, start, end *big.Int) {
 	contractAddress := common.HexToAddress(address)
 	query := ethereum.FilterQuery{
 		FromBlock: start,
-		ToBlock: end,
+		ToBlock:   end,
 		//FromBlock: big.NewInt(6383820),
 		//ToBlock:   big.NewInt(6383840),
 		Addresses: []common.Address{
@@ -53,7 +53,7 @@ func eventListenERC20(url string, address string, start, end *big.Int) {
 	}
 
 	// 接下来我们将解析JSON abi，稍后我们将使用解压缩原始日志数据：
-	contractAbi, err := abi.JSON(strings.NewReader(string(token.ERC20MetaData.ABI)))
+	contractAbi, err := abi.JSON(strings.NewReader(string(token_erc20.TokenErc20MetaData.ABI)))
 	if err != nil {
 		log.Fatal(err)
 	}

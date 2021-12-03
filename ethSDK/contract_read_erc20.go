@@ -5,11 +5,11 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-	// 首先创建一个ERC20智能合约interface。 这只是与您可以调用的函数的函数定义的契约。
-	token "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 	"log"
 	"math"
 	"math/big"
+	// 首先创建一个ERC20智能合约interface。 这只是与您可以调用的函数的函数定义的契约。
+	"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 )
 
 // 查询ERC20代币智能合约
@@ -22,7 +22,7 @@ func main() {
 	// 假设我们已经像往常一样设置了以太坊客户端，我们现在可以将新的token包导入我们的应用程序并实例化它。
 	// 这个例子里我们用BNB代币的地址. https://etherscan.io/token/0xB8c77482e45F1F44dE1745F52C74426C631bDD52
 	tokenAddress := common.HexToAddress("0xB8c77482e45F1F44dE1745F52C74426C631bDD52")
-	instance, err := token.NewERC20Caller(tokenAddress, client)
+	instance, err := token_erc20.NewTokenErc20Caller(tokenAddress, client)
 	if err != nil {
 		log.Fatal(err)
 	}

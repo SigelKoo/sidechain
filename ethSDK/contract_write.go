@@ -9,11 +9,10 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 	"math/big"
-	//store "sidechain/ethContract/contracts"
-	//"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
+	"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 )
 
-func ContractWrite(url string, privateString string, address string, blockNumber *big.Int, blockHash string) string {
+func ContractWrite(url string, privateString string, address string) string {
 	client, err := ethclient.Dial(url)
 	if err != nil {
 		log.Fatal(err)
@@ -48,16 +47,14 @@ func ContractWrite(url string, privateString string, address string, blockNumber
 	auth.GasPrice = gasPrice
 
 	contractAddress := common.HexToAddress(address)
-	//instance, err := ERC20.NewERC20(contractAddress, client)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//tx, err := instance.Transfer(auth, )
-	//tx, err := instance.Set(auth, blockNumber, blockHash)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//
-	//return tx.Hash().Hex()
-	return contractAddress.String()
+	instance, err := token_erc20.NewTokenErc20(contractAddress, client)
+	if err != nil {
+		log.Fatal(err)
+	}
+	tx, err := instance.Transfer(auth, common.HexToAddress(""), big.NewInt(1))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return tx.Hash().Hex()
 }
