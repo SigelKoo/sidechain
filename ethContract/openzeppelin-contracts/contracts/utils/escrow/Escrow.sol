@@ -10,7 +10,7 @@ import "../Address.sol";
  * @dev Base escrow contract, holds funds designated for a payee until they
  * withdraw them.
  *
- * Intended usage: This contract (and derived escrow contracts) should be a
+ * Intended usage: This contract (and derived escrow store-contracts) should be a
  * standalone contract, that only interacts with the contract that instantiated
  * it. That way, it is guaranteed that all Ether will be handled according to
  * the `Escrow` rules, and there is no need to check for payable functions or

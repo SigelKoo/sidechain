@@ -5,7 +5,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 	"math/big"
-	store "sidechain/ethContract/contracts"
+	store "sidechain/ethContract/store-contracts"
 )
 
 func ContractRead(url string, address string, BlockNumber *big.Int) string {

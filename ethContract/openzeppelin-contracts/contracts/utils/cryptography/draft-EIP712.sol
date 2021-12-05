@@ -9,7 +9,7 @@ import "./ECDSA.sol";
  *
  * The encoding specified in the EIP is very generic, and such a generic implementation in Solidity is not feasible,
  * thus this contract does not implement the encoding itself. Protocols need to implement the type-specific encoding
- * they need in their contracts using a combination of `abi.encode` and `keccak256`.
+ * they need in their store-contracts using a combination of `abi.encode` and `keccak256`.
  *
  * This contract implements the EIP 712 domain separator ({_domainSeparatorV4}) that is used as part of the encoding
  * scheme, and the final step of the encoding to obtain the message digest that is then signed via ECDSA
@@ -45,7 +45,7 @@ abstract contract EIP712 {
      * - `name`: the user readable name of the signing domain, i.e. the name of the DApp or the protocol.
      * - `version`: the current major version of the signing domain.
      *
-     * NOTE: These parameters cannot be changed except through a xref:learn::upgrading-smart-contracts.adoc[smart
+     * NOTE: These parameters cannot be changed except through a xref:learn::upgrading-smart-store-contracts.adoc[smart
      * contract upgrade].
      */
     constructor(string memory name, string memory version) {

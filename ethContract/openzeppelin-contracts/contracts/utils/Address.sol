@@ -24,7 +24,7 @@ library Address {
      * ====
      */
     function isContract(address account) internal view returns (bool) {
-        // This method relies on extcodesize, which returns 0 for contracts in
+        // This method relies on extcodesize, which returns 0 for store-contracts in
         // construction, since the code is only stored at the end of the
         // constructor execution.
 
@@ -40,7 +40,7 @@ library Address {
      * `recipient`, forwarding all available gas and reverting on errors.
      *
      * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost
-     * of certain opcodes, possibly making contracts go over the 2300 gas limit
+     * of certain opcodes, possibly making store-contracts go over the 2300 gas limit
      * imposed by `transfer`, making them unable to receive funds via
      * `transfer`. {sendValue} removes this limitation.
      *

@@ -38,7 +38,7 @@ var TokenErc20MetaData = &bind.MetaData{
 // Deprecated: Use TokenErc20MetaData.ABI instead.
 var TokenErc20ABI = TokenErc20MetaData.ABI
 
-// TokenErc20Bin is the compiled bytecode used for deploying new contracts.
+// TokenErc20Bin is the compiled bytecode used for deploying new store-contracts.
 // Deprecated: Use TokenErc20MetaData.Bin instead.
 var TokenErc20Bin = TokenErc20MetaData.Bin
 

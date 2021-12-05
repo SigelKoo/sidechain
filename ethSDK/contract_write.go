@@ -12,6 +12,7 @@ import (
 	"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 )
 
+// Problem：此处缺From与To
 func ContractWrite(url string, privateString string, address string) string {
 	client, err := ethclient.Dial(url)
 	if err != nil {

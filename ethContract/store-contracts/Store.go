@@ -38,7 +38,7 @@ var StoreMetaData = &bind.MetaData{
 // Deprecated: Use StoreMetaData.ABI instead.
 var StoreABI = StoreMetaData.ABI
 
-// StoreBin is the compiled bytecode used for deploying new contracts.
+// StoreBin is the compiled bytecode used for deploying new store-contracts.
 // Deprecated: Use StoreMetaData.Bin instead.
 var StoreBin = StoreMetaData.Bin
 
