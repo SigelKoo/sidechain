@@ -15,11 +15,6 @@ import (
 )
 
 // 现在在我们的Go应用程序中，让我们创建与ERC-20事件日志签名类型相匹配的结构类型：
-type LogTransfer struct {
-	From  common.Address
-	To    common.Address
-	Value *big.Int
-}
 
 type LogApproval struct {
 	TokenOwner common.Address
