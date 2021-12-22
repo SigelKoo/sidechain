@@ -3,7 +3,6 @@ package ethSDK
 import (
 	"context"
 	"crypto/ecdsa"
-	"fmt"
 	"log"
 	"math/big"
 	token_erc20 "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
@@ -12,6 +11,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
@@ -32,7 +32,11 @@ func Transfer(url string, contractAddress string, privateString string, to strin
 	if err != nil {
 		log.Fatal(err)
 	}
-	opts := bind.NewKeyedTransactor(privateKey)
+
+	opts, err := bind.NewKeyedTransactorWithChainID(privateKey, new(big.Int).SetUint64(uint64(686868)))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	publicKey := privateKey.Public()
 	publicKeyECSDA, ok := publicKey.(*ecdsa.PublicKey)
@@ -52,35 +56,34 @@ func Transfer(url string, contractAddress string, privateString string, to strin
 		log.Fatal(err)
 	}
 
-	auth := bind.NewKeyedTransactor(privateKey)
-	auth.Nonce = big.NewInt(int64(nonce))
-	auth.Value = big.NewInt(0)
-	auth.GasLimit = uint64(300000)
-	auth.GasPrice = gasPrice
+	opts.Nonce = big.NewInt(int64(nonce))
+	opts.Value = big.NewInt(0)
+	opts.GasLimit = uint64(300000)
+	opts.GasPrice = gasPrice
 
 	toAddress := common.HexToAddress(to)
 
-	parsed, err := abi.JSON(strings.NewReader(token_erc20.TokenErc20ABI))
-	input, err := parsed.Pack("transfer", toAddress, new(big.Int).SetString(value, 10))
+	parsed, err := abi.JSON(strings.NewReader(token_erc20.TokenErc20MetaData.ABI))
+
+	bigintValue, b := new(big.Int).SetString(value, 10)
+	if !b {
+		log.Fatal(b)
+	}
+
+	input, err := parsed.Pack("transfer", toAddress, bigintValue)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	amount := opts.opts.Value
-	if amount == nil {
-		amount = new(big.Int)
-	}
-
-	tx, _ := erc20.BuildTransfer(opts, address, web3go.NewBigInt(10))
-	fmt.Println(tx.GetHash().GetHex())
-	tx, _ = erc20.Transfer(opts, address, web3go.NewBigInt(10))
-	fmt.Println(tx.GetHash().GetHex())
-
-	//打印账户token余额
-	address, _ = web3go.NewAddressFromHex("0xfe04cb1d7d6715169edc07c8e3c2fdba3a0854af")
-	balance, err = erc20.BalanceOf(address)
+	rawTx := types.NewTransaction(opts.Nonce.Uint64(), tokenAddress, opts.Value, opts.GasLimit, opts.GasPrice, input)
+	signedTx, err := opts.Signer(fromAddress, rawTx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(balance.String())
+
+	tx, err := instance.Transfer(opts, toAddress, bigintValue)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return signedTx.Hash().String() + "," + tx.Hash().String()
 }
