@@ -1,13 +1,14 @@
 package fabricSDK
 
-import (
+/*import (
 	"encoding/json"
 	"fmt"
-	"github.com/hyperledger/fabric-sdk-go/pkg/client/event"
-	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 	"os"
 	"sidechain/ethSDK"
 	"time"
+
+	"github.com/hyperledger/fabric-sdk-go/pkg/client/event"
+	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 )
 
 type thisEvent struct {
@@ -62,7 +63,7 @@ func Start() error {
 					json.Unmarshal(ccEvent.Payload, &ent)
 					if ent.To == "0x0" {
 						// Problem：此处缺智能合约的地址
-						ethSDK.ContractWrite("HTTP://192.168.132.80:8501", "8c7ee582167250ee80c52d813f1747592e78c6c311d3576fa15570662b63dd74", "")
+						ethSDK.ContractWrite("HTTP://222.201.187.76:8501", "8c7ee582167250ee80c52d813f1747592e78c6c311d3576fa15570662b63dd74", "")
 					}
 				}
 			case <-time.After(time.Second * 5):
@@ -71,4 +72,4 @@ func Start() error {
 		}
 	}()
 	return nil
-}
+}*/

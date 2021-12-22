@@ -3,6 +3,13 @@ package ethSDK
 import (
 	"context"
 	"fmt"
+	"log"
+	"math/big"
+	"os"
+	token_erc20 "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
+	"sidechain/fabricSDK"
+	"strings"
+
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
@@ -11,12 +18,6 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
-	"log"
-	"math/big"
-	"os"
-	token_erc20 "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
-	"sidechain/fabricSDK"
-	"strings"
 )
 
 type LogTransfer struct {
@@ -26,7 +27,7 @@ type LogTransfer struct {
 }
 
 // 监听事件日志
-func eth_listen_erc20_transfer(url string, address string) {
+func Eth_listen_erc20_transfer(url string, address string) {
 	// 为了订阅事件日志，我们需要做的第一件事就是拨打启用websocket的以太坊客户端。
 	// client, err := ethclient.Dial("HTTP://192.168.132.80:8501")
 	client, err := ethclient.Dial(url)
@@ -164,3 +165,22 @@ func eth_listen_erc20_transfer(url string, address string) {
 		}
 	}
 }
+
+/*
+
+Log Block Number: 5573
+Log Index: 0
+Log Name: Transfer
+From: 0x60BD95E835ADe2552545DfC21ADB23069A0A7aD4
+To: 0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c
+Tokens: 100
+
+
+Log Block Number: 5600
+Log Index: 0
+Log Name: Transfer
+From: 0x60BD95E835ADe2552545DfC21ADB23069A0A7aD4
+To: 0x416b1e5329Bd97BB704866bD489747b26848fA42
+Tokens: 100
+
+*/

@@ -3,12 +3,13 @@ package ethSDK
 import (
 	"context"
 	"crypto/ecdsa"
+	"log"
+	"math/big"
+	token_erc20 "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
+
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"log"
-	"math/big"
-	"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 )
 
 func ContractDeploy(url string, privateString string) string {
@@ -47,4 +48,5 @@ func ContractDeploy(url string, privateString string) string {
 		log.Fatal(err)
 	}
 	return address.Hex() + " " + tx.Hash().Hex()
+	// 0xD78d66C33933a05c57c503d61667918f95cee351 0x031857cfbbbb91a768b0e21504f5d8b6dfb12b43a36dc8036bd0197020fa2190
 }
