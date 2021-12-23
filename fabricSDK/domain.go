@@ -34,9 +34,7 @@ func eventResult(notifier <-chan *fab.CCEvent, eventID string) error {
 		fmt.Printf("接收到链码事件: %v\n", ccEvent)
 		thisEvent := &event{}
 		json.Unmarshal(ccEvent.Payload, thisEvent)
-		fmt.Printf("from: %v\n", thisEvent.From)
-		fmt.Printf("to: %v\n", thisEvent.To)
-		fmt.Printf("value: %v\n", thisEvent.Value)
+		fmt.Printf("%v\n", thisEvent)
 	case <-time.After(time.Second * 20):
 		return fmt.Errorf("不能根据指定的事件ID接收到相应的链码事件(%s)", eventID)
 	}
