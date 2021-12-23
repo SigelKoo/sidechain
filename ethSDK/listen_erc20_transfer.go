@@ -96,7 +96,7 @@ func Eth_listen_erc20_transfer(url string, address string) {
 				fmt.Printf("Tokens: %s\n", transferEvent.Value.String())
 
 				fmt.Printf("\n\n")
-				if transferEvent.To == common.HexToAddress("0") {
+				if transferEvent.To == common.HexToAddress("0xf745069D290dE951508CA088D198678758DcA46c") {
 					Org1User1Info := fabricSDK.InitInfo{
 						ChannelID:     "mychannel",
 						ChannelConfig: "/home/fabric-samples/test-network/channel-artifacts/mychannel.block",

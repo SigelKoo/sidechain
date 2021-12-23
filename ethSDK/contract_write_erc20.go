@@ -64,6 +64,9 @@ func Transfer(url string, contractAddress string, privateString string, to strin
 	toAddress := common.HexToAddress(to)
 
 	parsed, err := abi.JSON(strings.NewReader(token_erc20.TokenErc20MetaData.ABI))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	bigintValue, b := new(big.Int).SetString(value, 10)
 	if !b {
@@ -85,5 +88,6 @@ func Transfer(url string, contractAddress string, privateString string, to strin
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	return signedTx.Hash().String() + "," + tx.Hash().String()
 }
