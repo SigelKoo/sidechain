@@ -3,15 +3,16 @@ package ethSDK
 import (
 	"context"
 	"fmt"
+	"log"
+
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"log"
 )
 
 // 监听事件日志
-func eventListen(url string, address string) {
+func EventListen(url string, address string) {
 	// 为了订阅事件日志，我们需要做的第一件事就是拨打启用websocket的以太坊客户端。
 	// client, err := ethclient.Dial("HTTP://192.168.132.80:8501")
 	client, err := ethclient.Dial(url)

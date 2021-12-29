@@ -1,4 +1,4 @@
-package ethfabricListen
+package ethSDK
 
 import (
 	"context"
@@ -30,16 +30,20 @@ type LogTransfer struct {
 
 // 监听事件日志
 func Eth_listen_erc20_transfer(url string, address string) {
+	// 为了订阅事件日志，我们需要做的第一件事就是拨打启用websocket的以太坊客户端。
+	// client, err := ethclient.Dial("HTTP://192.168.132.80:8501")
 	client, err := ethclient.Dial(url)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// 下一步是创建筛选查询。 在这个例子中，我们将阅读来自我们在之前课程中创建的示例合约中的所有事件。
 	contractAddress := common.HexToAddress(address)
 	query := ethereum.FilterQuery{
 		Addresses: []common.Address{contractAddress},
 	}
 
+	// 我们接收事件的方式是通过Go channel。 让我们从go-ethereumcore/types包创建一个类型为Log的channel。
 	logs := make(chan types.Log)
 
 	contractAbi, err := abi.JSON(strings.NewReader(string(token_erc20.TokenErc20MetaData.ABI)))
@@ -50,6 +54,8 @@ func Eth_listen_erc20_transfer(url string, address string) {
 	logTransferSig := []byte("Transfer(address,address,uint256)")
 	logTransferSigHash := crypto.Keccak256Hash(logTransferSig)
 
+	// 现在我们所要做的就是通过从客户端调用SubscribeFilterLogs来订阅，它接收查询选项和输出通道。
+	// 这将返回包含unsubscribe和error方法的订阅结构。
 	sub, err := client.SubscribeFilterLogs(context.Background(), query, logs)
 	if err != nil {
 		log.Fatal(err)
@@ -62,6 +68,7 @@ func Eth_listen_erc20_transfer(url string, address string) {
 	}
 	defer sdk.Close()
 
+	// 最后，我们要做的就是使用select语句设置一个连续循环来读入新的日志事件或订阅错误。
 	for {
 		select {
 		case err := <-sub.Err():
@@ -71,6 +78,8 @@ func Eth_listen_erc20_transfer(url string, address string) {
 			fmt.Printf("Log Index: %d\n", vLog.Index)
 
 			switch vLog.Topics[0].Hex() {
+			// 现在要解析Transfer事件日志，我们将使用abi.Unpack将原始日志数据解析为我们的日志类型结构。
+			// 解包不会解析indexed事件类型，因为它们存储在topics下，所以对于那些我们必须单独解析，如下例所示：
 			case logTransferSigHash.Hex():
 				fmt.Printf("Log Name: Transfer\n")
 

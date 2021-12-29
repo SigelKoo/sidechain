@@ -3,15 +3,16 @@ package ethSDK
 import (
 	"context"
 	"fmt"
+	"log"
+	"math/big"
+	token_erc20 "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
+	"strings"
+
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"log"
-	"math/big"
-	"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
-	"strings"
 )
 
 // 现在在我们的Go应用程序中，让我们创建与ERC-20事件日志签名类型相匹配的结构类型：
