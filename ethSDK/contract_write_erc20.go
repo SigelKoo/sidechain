@@ -56,7 +56,6 @@ func Transfer(url string, contractAddress string, privateString string, to strin
 		log.Fatal(err)
 	}
 
-	opts.Nonce = big.NewInt(int64(nonce))
 	opts.Value = big.NewInt(0)
 	opts.GasLimit = uint64(300000)
 	opts.GasPrice = gasPrice
@@ -78,7 +77,14 @@ func Transfer(url string, contractAddress string, privateString string, to strin
 		log.Fatal(err)
 	}
 
-	rawTx := types.NewTransaction(opts.Nonce.Uint64(), tokenAddress, opts.Value, opts.GasLimit, opts.GasPrice, input)
+	rawTx := types.NewTx(&types.LegacyTx{
+		Nonce:    nonce,
+		To:       &tokenAddress,
+		Value:    opts.Value,
+		Gas:      opts.GasLimit,
+		GasPrice: opts.GasPrice,
+		Data:     input,
+	})
 	signedTx, err := opts.Signer(fromAddress, rawTx)
 	if err != nil {
 		log.Fatal(err)
