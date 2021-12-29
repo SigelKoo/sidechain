@@ -3,13 +3,14 @@ package ethSDK
 import (
 	"context"
 	"crypto/ecdsa"
+	"log"
+	"math/big"
+	token_erc20 "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
+
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"log"
-	"math/big"
-	"sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 )
 
 func ContractWrite(url string, privateString string, address string) string {

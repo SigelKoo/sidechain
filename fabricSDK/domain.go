@@ -48,8 +48,8 @@ func eventResult(notifier <-chan *fab.CCEvent, eventID string) error {
 		if err != nil {
 			return fmt.Errorf("ccEvent To解析失败：%s", err)
 		}
-		fmt.Println(getX509UserName(string(fromDec)))
-		fmt.Println(getX509UserName(string(toDec)))
+		fmt.Println(GetX509UserName(string(fromDec)))
+		fmt.Println(GetX509UserName(string(toDec)))
 		fmt.Println(thisEvent.Value)
 	case <-time.After(time.Second * 20):
 		return fmt.Errorf("不能根据指定的事件ID接收到相应的链码事件(%s)", eventID)
@@ -57,7 +57,7 @@ func eventResult(notifier <-chan *fab.CCEvent, eventID string) error {
 	return nil
 }
 
-func getX509UserName(str string) string {
+func GetX509UserName(str string) string {
 	s1 := strings.Index(str, ",")
 	s2 := strings.Index(str, "=")
 	return str[s2+1 : s1]

@@ -3,8 +3,6 @@ package ethSDK
 import (
 	"fmt"
 	"log"
-	"math"
-	"math/big"
 
 	token_erc20 "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 
@@ -38,7 +36,7 @@ func GetUserBalance(url string, contractAddress string, userAddress string) stri
 
 	// fmt.Printf("wei: %s\n", bal)
 
-	decimals, err := instance.Decimals(&bind.CallOpts{})
+	/*decimals, err := instance.Decimals(&bind.CallOpts{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,9 +44,9 @@ func GetUserBalance(url string, contractAddress string, userAddress string) stri
 	// 我们可以做一些简单的数学运算将余额转换为可读的十进制格式。
 	fbal := new(big.Float)
 	fbal.SetString(bal.String())
-	value := new(big.Float).Quo(fbal, big.NewFloat(math.Pow10(int(decimals))))
+	value := new(big.Float).Quo(fbal, big.NewFloat(math.Pow10(int(decimals))))*/
 
-	return value.String()
+	return bal.String()
 }
 
 func GetTokenInfo(url string, contractAddress string) string {
