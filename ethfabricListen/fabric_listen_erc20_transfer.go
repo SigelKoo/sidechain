@@ -1,6 +1,6 @@
 package ethfabricListen
 
-import (
+/*import (
 	"encoding/json"
 	"fmt"
 	"log"
@@ -21,7 +21,7 @@ type thisEvent struct {
 	Value int    `json:"value"`
 }
 
-func fabric_listen_erc20_transfer() {
+func Fabric_listen_erc20_transfer() {
 	sdk, err := fabricSDK.SetupSDK("./config/crypto-config.yaml", false)
 	if err != nil {
 		log.Fatal(err)
@@ -44,7 +44,6 @@ func fabric_listen_erc20_transfer() {
 
 	channelProvider := sdk.ChannelContext(Org1UserInfo.ChannelID, fabsdk.WithUser(Org1UserInfo.UserName), fabsdk.WithOrg(Org1UserInfo.OrgName))
 	ec, err := event.New(channelProvider, event.WithBlockEvents(), event.WithSeekType(seek.Newest))
-
 	if err != nil {
 		log.Fatal("failed to create fabcli, error: %v", err)
 	}
@@ -56,21 +55,18 @@ func fabric_listen_erc20_transfer() {
 
 	defer ec.Unregister(registration)
 
-	// todo: add context
-	go func() {
-		for {
-			select {
-			case ccEvent := <-notifier:
-				if ccEvent != nil {
-					ent := thisEvent{}
-					json.Unmarshal(ccEvent.Payload, &ent)
-					if fabricSDK.GetX509UserName(ent.To) == "minter" {
-						ethSDK.Transfer("HTTP://127.0.0.1:8501", "8c7ee582167250ee80c52d813f1747592e78c6c311d3576fa15570662b63dd74", fabricSDK.GetX509UserName(ent.From), strconv.Itoa(ent.Value))
-					}
+	for {
+		select {
+		case ccEvent := <-notifier:
+			if ccEvent != nil {
+				ent := thisEvent{}
+				json.Unmarshal(ccEvent.Payload, &ent)
+				if fabricSDK.GetX509UserName(ent.To) == "minter" {
+					fmt.Println(ethSDK.Transfer("HTTP://127.0.0.1:8501", "0xD78d66C33933a05c57c503d61667918f95cee351", "8c7ee582167250ee80c52d813f1747592e78c6c311d3576fa15570662b63dd74", fabricSDK.GetX509UserName(ent.From), strconv.Itoa(ent.Value)))
 				}
-			case <-time.After(time.Second * 5):
-				fmt.Println("timeout while waiting for chaincode event")
 			}
+		case <-time.After(time.Second * 5):
+			fmt.Println("timeout while waiting for chaincode event")
 		}
-	}()
-}
+	}
+}*/

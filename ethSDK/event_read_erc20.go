@@ -23,6 +23,12 @@ type LogApproval struct {
 	Value      *big.Int
 }
 
+type LogTransfer struct {
+	From  common.Address
+	To    common.Address
+	Value *big.Int
+}
+
 // 读取ERC-20代币的事件日志
 func eventListenERC20(url string, address string, start, end *big.Int) {
 	// 初始化以太坊客户端
