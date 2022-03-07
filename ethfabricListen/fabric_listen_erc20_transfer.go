@@ -1,6 +1,6 @@
 package ethfabricListen
 
-/*import (
+import (
 	"encoding/json"
 	"fmt"
 	"log"
@@ -49,6 +49,7 @@ func Fabric_listen_erc20_transfer() {
 	}
 
 	registration, notifier, err := ec.RegisterChaincodeEvent(Org1UserInfo.ChaincodeID, "eventBurn")
+
 	if err != nil {
 		log.Fatal("failed to register chaincode event, error: %v", err)
 	}
@@ -69,4 +70,4 @@ func Fabric_listen_erc20_transfer() {
 			fmt.Println("timeout while waiting for chaincode event")
 		}
 	}
-}*/
+}
