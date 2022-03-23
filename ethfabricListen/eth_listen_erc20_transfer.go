@@ -35,7 +35,8 @@ func (lt *LogTransfer) string() string {
 }
 
 // 监听事件日志
-func Eth_listen_erc20_transfer(url string, address string) {
+func Eth_listen_erc20_transfer(url string, address string, done func()) {
+	defer done()
 	client, err := ethclient.Dial(url)
 	if err != nil {
 		log.Fatal(err)
