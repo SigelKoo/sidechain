@@ -48,15 +48,8 @@ func (t *ServiceSetup) ClientAccountID() (string, error) {
 }
 
 func (t *ServiceSetup) Mint(amount string) (string, error) {
-	eventID := "eventMint"
-	reg, notifier := regitserEvent(t.EventClient, t.ChaincodeID, eventID)
-	defer t.EventClient.Unregister(reg)
 	req := channel.Request{ChaincodeID: t.ChaincodeID, Fcn: "Mint", Args: [][]byte{[]byte(amount)}}
 	respone, err := t.ChannelClient.Execute(req)
-	if err != nil {
-		return "", err
-	}
-	err = eventResult(notifier, eventID)
 	if err != nil {
 		return "", err
 	}
