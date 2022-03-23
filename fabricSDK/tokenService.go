@@ -13,7 +13,7 @@ func (t *ServiceSetup) Transfer(recipient string, amount string) (string, error)
 	if err != nil {
 		return "", err
 	}
-	err = eventResult(notifier, eventID)
+	err = transferEventResult(notifier, eventID)
 	if err != nil {
 		return "", err
 	}
@@ -56,7 +56,7 @@ func (t *ServiceSetup) Mint(amount string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	err = eventResult(notifier, eventID)
+	err = mintEventResult(notifier, eventID)
 	if err != nil {
 		return "", err
 	}
@@ -72,7 +72,7 @@ func (t *ServiceSetup) Burn(amount string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	err = eventResult(notifier, eventID)
+	err = burnEventResult(notifier, eventID)
 	if err != nil {
 		return "", err
 	}
