@@ -1,9 +1,11 @@
 package fabricSDK
 
 import (
+	"fmt"
+	"sidechain/fabricSDK"
 	"testing"
 )
 
 func TestHello(t *testing.T) {
-	getBlockNumber()
+	fmt.Println(fabricSDK.GetBlockNumber())
 }

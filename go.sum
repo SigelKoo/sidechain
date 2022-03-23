@@ -120,14 +120,6 @@ github.com/cloudflare/redoctober v0.0.0-20171127175943-746a508df14c/go.mod h1:6S
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
 github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
 github.com/cncf/xds/go v0.0.0-20210312221358-fbca930ec8ed/go.mod h1:eXthEFrGJvWHgFFCl3hGmgk+/aYT6PnTQLykKQRLhEs=
-github.com/cockroachdb/c-jemalloc v0.0.0-20170411174633-bc4025230132 h1:JLzodNNPyO/As0DmKyGZewPESS0eIleUlwJlJHJCF5Q=
-github.com/cockroachdb/c-jemalloc v0.0.0-20170411174633-bc4025230132/go.mod h1:wlVnFXJUiqHOCPwyycY+y9LV/cw07BVqBaDqbwOLKW0=
-github.com/cockroachdb/c-lz4 v0.0.0-20160606191938-834d3303c9e8 h1:o4f8dB7ZhZd9WmBCfEI1i2oMUnbvJlF8WEGx8oKS914=
-github.com/cockroachdb/c-lz4 v0.0.0-20160606191938-834d3303c9e8/go.mod h1:Ola79mpcElJLxidgc5m6hoB/+JbsWaPZtYCK78lDSU4=
-github.com/cockroachdb/c-rocksdb v0.0.0-20170329231916-0dd42399d1f0 h1:Cce9tMnUv6MOozc89XuUDr6f+hvyZe4Bswue1Kw9U8w=
-github.com/cockroachdb/c-rocksdb v0.0.0-20170329231916-0dd42399d1f0/go.mod h1:0tLJ2N1ipZxhquHE1rWtErugwvyd5VehxVB2qWfaDt4=
-github.com/cockroachdb/c-snappy v0.0.0-20161124051749-c0cd3c9ce92f h1:zqXJ1sagQ3Zr7H5UD1ZMOhXqgU7g5FNub/3NttbKF94=
-github.com/cockroachdb/c-snappy v0.0.0-20161124051749-c0cd3c9ce92f/go.mod h1:iWbaWq4XhdoEer6gt70/Hf6f0UevUJjni6spJ1T65rU=
 github.com/consensys/bavard v0.1.8-0.20210406032232-f3452dc9b572/go.mod h1:Bpd0/3mZuaj6Sj+PqrmIquiOKy397AKGThQPaGzNXAQ=
 github.com/consensys/gnark-crypto v0.4.1-0.20210426202927-39ac3d4b3f1f/go.mod h1:815PAHg3wvysy0SyIqanF8gZ0Y1wjk/hrDHD/iT88+Q=
 github.com/coreos/bbolt v1.3.2/go.mod h1:iRUV2dpdMOn7Bo10OQBFzIJO9kkE559Wcmn+qkEiiKk=
@@ -153,8 +145,6 @@ github.com/deckarep/golang-set v0.0.0-20180603214616-504e848d77ea/go.mod h1:93vs
 github.com/decred/dcrd/lru v1.0.0/go.mod h1:mxKOwFd7lFjN2GZYsiz/ecgqR6kkYAl+0pz0tEMk218=
 github.com/deepmap/oapi-codegen v1.6.0/go.mod h1:ryDa9AgbELGeB+YEXE1dR53yAjHwFvE9iAUlWl9Al3M=
 github.com/deepmap/oapi-codegen v1.8.2/go.mod h1:YLgSKSDv/bZQB7N4ws6luhozi3cEdRktEqrX88CvjIw=
-github.com/dgraph-io/badger-bench v0.0.0-20190920190938-db150ce8b629 h1:/OrzOtOVmhV32zyvNPF6aHa1zxW38+LYpDcJWQAirHw=
-github.com/dgraph-io/badger-bench v0.0.0-20190920190938-db150ce8b629/go.mod h1:4PuRaTUX+HC28ad2hzKEJ9NiKsyQya4/iGg+bWz4tDU=
 github.com/dgraph-io/badger/v3 v3.2103.2 h1:dpyM5eCJAtQCBcMCZcT4UBZchuTJgCywerHHgmxfxM8=
 github.com/dgraph-io/badger/v3 v3.2103.2/go.mod h1:RHo4/GmYcKKh5Lxu63wLEMHJ70Pac2JqZRYGhlyAo2M=
 github.com/dgraph-io/ristretto v0.1.0 h1:Jv3CGQHp9OjuMBSne1485aDpUkTKEcUqF+jm/LuerPI=
@@ -356,9 +346,8 @@ github.com/hyperledger/fabric-lib-go v1.0.0 h1:UL1w7c9LvHZUSkIvHTDGklxFv2kTeva1Q
 github.com/hyperledger/fabric-lib-go v1.0.0/go.mod h1:H362nMlunurmHwkYqR5uHL2UDWbQdbfz74n8kbCFsqc=
 github.com/hyperledger/fabric-protos-go v0.0.0-20190919234611-2a87503ac7c9/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
 github.com/hyperledger/fabric-protos-go v0.0.0-20200424173316-dd554ba3746e/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
+github.com/hyperledger/fabric-protos-go v0.0.0-20200707132912-fee30f3ccd23 h1:SEbB3yH4ISTGRifDamYXAst36gO2kM855ndMJlsv+pc=
 github.com/hyperledger/fabric-protos-go v0.0.0-20200707132912-fee30f3ccd23/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
-github.com/hyperledger/fabric-protos-go v0.0.0-20210911123859-041d13f0980c h1:QPhSriw6EzMOj/d7gcGiKEvozVvQ5HLk9UWie4KAvSs=
-github.com/hyperledger/fabric-protos-go v0.0.0-20210911123859-041d13f0980c/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
 github.com/hyperledger/fabric-sdk-go v1.0.0 h1:NRu0iNbHV6u4nd9jgYghAdA1Ll4g0Sri4hwMEGiTbyg=
 github.com/hyperledger/fabric-sdk-go v1.0.0/go.mod h1:qWE9Syfg1KbwNjtILk70bJLilnmCvllIYFCSY/pa1RU=
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=

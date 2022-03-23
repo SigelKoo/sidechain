@@ -8,8 +8,10 @@ import (
 	"os"
 	token_erc20 "sidechain/ethContract/openzeppelin-contracts/contracts/token/ERC20"
 	"sidechain/fabricSDK"
+	"sidechain/musig"
 	"strings"
 
+	"github.com/btcsuite/btcd/btcec"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
@@ -26,6 +28,10 @@ type LogTransfer struct {
 	From  common.Address
 	To    common.Address
 	Value *big.Int
+}
+
+func (lt *LogTransfer) string() string {
+	return lt.From.Hex() + "," + lt.To.Hex() + "," + lt.Value.String()
 }
 
 // 监听事件日志
@@ -88,7 +94,7 @@ func Eth_listen_erc20_transfer(url string, address string) {
 				fmt.Printf("To: %s\n", transferEvent.To.Hex())
 				fmt.Printf("Tokens: %s\n", transferEvent.Value.String())
 
-				fmt.Printf("\n\n")
+				fmt.Println()
 				if transferEvent.To == common.HexToAddress("0xf745069D290dE951508CA088D198678758DcA46c") {
 					Org1User1Info := fabricSDK.InitInfo{
 						ChannelID:     "mychannel",
@@ -156,6 +162,8 @@ func Eth_listen_erc20_transfer(url string, address string) {
 						EventClient:   eventClient,
 					}
 
+					musig(transferEvent.string())
+
 					clientID, err := client1ServiceSetup.ClientAccountID()
 					if err != nil {
 						fmt.Println(err.Error())
@@ -170,5 +178,64 @@ func Eth_listen_erc20_transfer(url string, address string) {
 				}
 			}
 		}
+	}
+}
+
+func musig(tx string) {
+	// Alice
+	// private/public keys
+	x1, X1 := musig.KeyGen()
+	// random value
+	r1, R1 := musig.KeyGen()
+
+	// Bob
+	// private/public keys
+	x2, X2 := musig.KeyGen()
+	// random value
+	r2, R2 := musig.KeyGen()
+
+	// Carol
+	// private/public keys
+	x3, X3 := musig.KeyGen()
+	// random value
+	r3, R3 := musig.KeyGen()
+
+	// L is a multiset of public keys.
+	var L []*btcec.PublicKey
+	L = append(L, X1)
+	L = append(L, X2)
+	L = append(L, X3)
+	fmt.Println("Public keys")
+	for i, l := range L {
+		fmt.Printf("L%d:%x\n", i, l.SerializeCompressed())
+	}
+
+	// R is a part of signature.
+	R := musig.AddPubs(R1, R2, R3)
+
+	// message
+	m := []byte(tx)
+	fmt.Printf("tx:%x\n", tx)
+
+	//Signing
+	// Alice signs.
+	s1 := musig.Sign(L, R, m, x1, r1)
+	// Bob signs.
+	s2 := musig.Sign(L, R, m, x2, r2)
+	// Bob signs.
+	s3 := musig.Sign(L, R, m, x3, r3)
+	// s is a part of signature.
+	s := musig.AddSigs(s1, s2, s3)
+	// signature
+	fmt.Println("Signature")
+	fmt.Printf("R:%x\n", R.SerializeCompressed())
+	fmt.Printf("s:%v\n", s)
+
+	// Verification
+	v := musig.Ver(L, m, R, s)
+	fmt.Printf("Result:%v\n", v)
+
+	if v != 1 {
+		fmt.Println("Fail")
 	}
 }

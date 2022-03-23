@@ -4,7 +4,6 @@ go 1.17
 
 require (
 	github.com/btcsuite/btcd v0.21.0-beta
-	github.com/dgraph-io/badger-bench v0.0.0-20190920190938-db150ce8b629
 	github.com/dgraph-io/badger/v3 v3.2103.2
 	github.com/ethereum/go-ethereum v1.10.8
 	github.com/hyperledger/fabric-contract-api-go v1.1.1
@@ -22,10 +21,6 @@ require (
 	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
 	github.com/cloudflare/cfssl v1.4.1 // indirect
-	github.com/cockroachdb/c-jemalloc v0.0.0-20170411174633-bc4025230132 // indirect
-	github.com/cockroachdb/c-lz4 v0.0.0-20160606191938-834d3303c9e8 // indirect
-	github.com/cockroachdb/c-rocksdb v0.0.0-20170329231916-0dd42399d1f0 // indirect
-	github.com/cockroachdb/c-snappy v0.0.0-20161124051749-c0cd3c9ce92f // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/deckarep/golang-set v0.0.0-20180603214616-504e848d77ea // indirect
 	github.com/dgraph-io/ristretto v0.1.0 // indirect
@@ -57,7 +52,7 @@ require (
 	github.com/hyperledger/fabric-chaincode-go v0.0.0-20210718160520-38d29fabecb9 // indirect
 	github.com/hyperledger/fabric-config v0.0.7 // indirect
 	github.com/hyperledger/fabric-lib-go v1.0.0 // indirect
-	github.com/hyperledger/fabric-protos-go v0.0.0-20210911123859-041d13f0980c // indirect
+	github.com/hyperledger/fabric-protos-go v0.0.0-20200707132912-fee30f3ccd23 // indirect
 	github.com/jackpal/go-nat-pmp v1.0.2 // indirect
 	github.com/joho/godotenv v1.3.0 // indirect
 	github.com/klauspost/compress v1.12.3 // indirect
