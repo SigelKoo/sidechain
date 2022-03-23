@@ -48,8 +48,15 @@ func (t *ServiceSetup) ClientAccountID() (string, error) {
 }
 
 func (t *ServiceSetup) Mint(amount string) (string, error) {
+	eventID := "Mint"
+	reg, notifier := regitserEvent(t.EventClient, t.ChaincodeID, eventID)
+	defer t.EventClient.Unregister(reg)
 	req := channel.Request{ChaincodeID: t.ChaincodeID, Fcn: "Mint", Args: [][]byte{[]byte(amount)}}
 	respone, err := t.ChannelClient.Execute(req)
+	if err != nil {
+		return "", err
+	}
+	err = eventResult(notifier, eventID)
 	if err != nil {
 		return "", err
 	}
@@ -57,7 +64,7 @@ func (t *ServiceSetup) Mint(amount string) (string, error) {
 }
 
 func (t *ServiceSetup) Burn(amount string) (string, error) {
-	eventID := "eventBurn"
+	eventID := "Burn"
 	reg, notifier := regitserEvent(t.EventClient, t.ChaincodeID, eventID)
 	defer t.EventClient.Unregister(reg)
 	req := channel.Request{ChaincodeID: t.ChaincodeID, Fcn: "Burn", Args: [][]byte{[]byte(amount)}}
