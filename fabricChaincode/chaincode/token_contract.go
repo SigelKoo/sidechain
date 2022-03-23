@@ -100,7 +100,7 @@ func (s *SmartContract) Mint(ctx contractapi.TransactionContextInterface, amount
 	if err != nil {
 		return fmt.Errorf("failed to obtain JSON encoding: %v", err)
 	}
-	err = ctx.GetStub().SetEvent("Transfer", transferEventJSON)
+	err = ctx.GetStub().SetEvent("Mint", transferEventJSON)
 	if err != nil {
 		return fmt.Errorf("failed to set event: %v", err)
 	}
@@ -180,7 +180,7 @@ func (s *SmartContract) Burn(ctx contractapi.TransactionContextInterface, amount
 	if err != nil {
 		return fmt.Errorf("failed to obtain JSON encoding: %v", err)
 	}
-	err = ctx.GetStub().SetEvent("Transfer", transferEventJSON)
+	err = ctx.GetStub().SetEvent("Burn", transferEventJSON)
 	if err != nil {
 		return fmt.Errorf("failed to set event: %v", err)
 	}

@@ -74,8 +74,12 @@ func Eth_listen_erc20_transfer(url string, address string, done func()) {
 		case err := <-sub.Err():
 			log.Fatal(err)
 		case vLog := <-logs:
-			fmt.Printf("Log Block Number: %d\n", vLog.BlockNumber)
-			fmt.Printf("Log Index: %d\n", vLog.Index)
+			fmt.Println("---------------------------------------------------------")
+			fmt.Println("以太坊 交易事件：")
+			fmt.Printf("Transaction Hash: %s\n", vLog.TxHash.String())
+			fmt.Printf("Block Number: %d\n", vLog.BlockNumber)
+			fmt.Printf("Block Hash: %s\n", vLog.BlockHash.String())
+			fmt.Printf("Contract Address: %s\n", vLog.Address.Hex())
 
 			switch vLog.Topics[0].Hex() {
 			case logTransferSigHash.Hex():
@@ -95,7 +99,6 @@ func Eth_listen_erc20_transfer(url string, address string, done func()) {
 				fmt.Printf("To: %s\n", transferEvent.To.Hex())
 				fmt.Printf("Tokens: %s\n", transferEvent.Value.String())
 
-				fmt.Println()
 				if transferEvent.To == common.HexToAddress("0xf745069D290dE951508CA088D198678758DcA46c") {
 					Org1User1Info := fabricSDK.InitInfo{
 						ChannelID:     "mychannel",
@@ -190,6 +193,7 @@ func Eth_listen_erc20_transfer(url string, address string, done func()) {
 					} else {
 						fmt.Println("用户当前余额：" + accbal)
 					}
+					fmt.Println()
 				}
 			}
 		}
@@ -220,17 +224,19 @@ func sigandver(tx string) {
 	L = append(L, X1)
 	L = append(L, X2)
 	L = append(L, X3)
-	fmt.Println("Public keys")
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("公钥展示：")
 	for i, l := range L {
-		fmt.Printf("L%d:%x\n", i, l.SerializeCompressed())
+		fmt.Printf("签名者%d:%x\n", i+1, l.SerializeCompressed())
 	}
 
 	// R is a part of signature.
 	R := musig.AddPubs(R1, R2, R3)
-
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("签名消息展示：")
 	// message
 	m := []byte(tx)
-	fmt.Printf("tx:%x\n", tx)
+	fmt.Printf("签名消息:%x\n", tx)
 
 	//Signing
 	// Alice signs.
@@ -242,11 +248,14 @@ func sigandver(tx string) {
 	// s is a part of signature.
 	s := musig.AddSigs(s1, s2, s3)
 	// signature
-	fmt.Println("Signature")
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("签名展示：")
 	fmt.Printf("R:%x\n", R.SerializeCompressed())
 	fmt.Printf("s:%v\n", s)
 
 	// Verification
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("验证结果展示，1即为正确：")
 	v := musig.Ver(L, m, R, s)
 	fmt.Printf("Result:%v\n", v)
 
