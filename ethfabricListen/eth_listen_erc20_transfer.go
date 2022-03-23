@@ -188,7 +188,7 @@ func Eth_listen_erc20_transfer(url string, address string, done func()) {
 					if err != nil {
 						fmt.Println(err.Error())
 					} else {
-						fmt.Println(accbal)
+						fmt.Println("用户当前余额：" + accbal)
 					}
 				}
 			}
