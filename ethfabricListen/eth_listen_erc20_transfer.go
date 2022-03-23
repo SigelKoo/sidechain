@@ -162,7 +162,7 @@ func Eth_listen_erc20_transfer(url string, address string) {
 						EventClient:   eventClient,
 					}
 
-					musig(transferEvent.string())
+					sigandver(transferEvent.string())
 
 					clientID, err := client1ServiceSetup.ClientAccountID()
 					if err != nil {
@@ -181,7 +181,7 @@ func Eth_listen_erc20_transfer(url string, address string) {
 	}
 }
 
-func musig(tx string) {
+func sigandver(tx string) {
 	// Alice
 	// private/public keys
 	x1, X1 := musig.KeyGen()
