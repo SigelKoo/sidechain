@@ -170,11 +170,18 @@ func Eth_listen_erc20_transfer(url string, address string, done func()) {
 						fmt.Println(err.Error())
 					}
 
-					msg, err := minterServiceSetup.Transfer(clientID, transferEvent.Value.String())
+					mintMsg, err := minterServiceSetup.Mint(transferEvent.Value.String())
 					if err != nil {
 						fmt.Println(err.Error())
 					} else {
-						fmt.Println("转账成功，交易编号为：" + msg)
+						fmt.Println("铸币成功，交易编号为：" + mintMsg)
+					}
+
+					tranMsg, err := minterServiceSetup.Transfer(clientID, transferEvent.Value.String())
+					if err != nil {
+						fmt.Println(err.Error())
+					} else {
+						fmt.Println("转账成功，交易编号为：" + tranMsg)
 					}
 
 					accbal, err := client1ServiceSetup.ClientAccountBalance()
