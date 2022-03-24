@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"sidechain/ethSDK"
 	"sidechain/fabricSDK"
 	"strconv"
 	"time"
@@ -73,8 +72,11 @@ func Fabric_listen_erc20_transfer(done func()) {
 				fmt.Printf("Block Number: %d\n", ccEvent.BlockNumber)
 				fmt.Printf("Transaction Hash: %s\n", ccEvent.TxID)
 				fmt.Printf("Event Name: %s\n", ccEvent.EventName)
+				fmt.Printf("From: %s\n", ent.From)
+				fmt.Printf("To: %s\n", ent.To)
+				fmt.Printf("Value: %d\n", ent.Value)
 				sigandver(ent.string())
-				fmt.Println("转账成功，交易编号为：", ethSDK.Transfer("HTTP://127.0.0.1:8501", "0xD78d66C33933a05c57c503d61667918f95cee351", "8c7ee582167250ee80c52d813f1747592e78c6c311d3576fa15570662b63dd74", fabricSDK.GetX509UserName(ent.From), strconv.Itoa(ent.Value)))
+				//fmt.Println("转账成功，交易编号为：", ethSDK.Transfer("HTTP://127.0.0.1:8501", "0xD78d66C33933a05c57c503d61667918f95cee351", "8c7ee582167250ee80c52d813f1747592e78c6c311d3576fa15570662b63dd74", fabricSDK.GetX509UserName(ent.From), strconv.Itoa(ent.Value)))
 			}
 		case <-time.After(time.Second * 5):
 		}
