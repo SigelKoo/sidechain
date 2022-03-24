@@ -62,7 +62,7 @@
                 </div>
             </form>
         </div>
-        <form action="/transfer" method="post" navalidate autocomplete="off">
+        <form action="/submit" method="post" navalidate autocomplete="off">
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">侧链转账</h4>
                 <div class="mb-3">
@@ -71,7 +71,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">To:</span>
                         </div>
-                        <input type="text" class="form-control" id="to" placeholder="address" required>
+                        <input type="text" class="form-control" name="to" id="to" placeholder="address" required>
                         <div class="invalid-feedback" style="width: 100%;">
                             Address is required.
                         </div>
@@ -83,7 +83,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Value:</span>
                         </div>
-                        <input type="text" class="form-control" id="value" placeholder="value" required>
+                        <input type="text" class="form-control" name="value" id="value" placeholder="value" required>
                         <div class="invalid-feedback" style="width: 100%;">
                             Value is required.
                         </div>

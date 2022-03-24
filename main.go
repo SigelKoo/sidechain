@@ -2,29 +2,31 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
-	"github.com/hyperledger/fabric-sdk-go/pkg/client/event"
-	"github.com/hyperledger/fabric-sdk-go/pkg/fab/events/deliverclient/seek"
-	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 	"net/http"
 	"os"
 	"sidechain/ethSDK"
 	"sidechain/ethfabricListen"
 	"sidechain/fabricSDK"
 	"sync"
+
+	"github.com/gin-gonic/gin"
+	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
+	"github.com/hyperledger/fabric-sdk-go/pkg/client/event"
+	"github.com/hyperledger/fabric-sdk-go/pkg/fab/events/deliverclient/seek"
+	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 )
 
 func main() {
 	var wg sync.WaitGroup
-	wg.Add(1)
+	wg.Add(3)
 	go ethfabricListen.Eth_listen_erc20_transfer("/home/eth-poa/signer1/data/geth.ipc", "0xD78d66C33933a05c57c503d61667918f95cee351", wg.Done)
 	go ethfabricListen.Fabric_listen_erc20_transfer(wg.Done)
-	go startService()
+	go startService(wg.Done)
 	wg.Wait()
 }
 
-func startService() {
+func startService(done func()) {
+	defer done()
 	r := gin.Default()
 	r.LoadHTMLGlob("./web/**/*")
 	r.StaticFS("/css", http.Dir("./web/css"))
@@ -68,9 +70,14 @@ func startService() {
 			ChannelClient: channelClient,
 			EventClient:   eventClient,
 		}
+		balance, err := client1ServiceSetup.ClientAccountBalance()
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
 		c.HTML(http.StatusOK, "transfer.html", gin.H{
 			"token1": ethSDK.GetUserBalance("/home/eth-poa/signer1/data/geth.ipc", "0xD78d66C33933a05c57c503d61667918f95cee351", "0x416b1e5329Bd97BB704866bD489747b26848fA42"),
-			"token2": client1ServiceSetup.ClientAccountBalance(),
+			"token2": balance,
 		})
 	})
 	r.POST("/login", func(c *gin.Context) {
@@ -81,10 +88,10 @@ func startService() {
 			"Password": password,
 		})
 	})
-	r.POST("/transfer", func(c *gin.Context) {
+	r.POST("/submit", func(c *gin.Context) {
 		to := c.PostForm("to")
 		value := c.PostForm("value")
-		Org2UserInfo := fabricSDK.InitInfo{
+		Org2User1Info := fabricSDK.InitInfo{
 			ChannelID:     "mychannel",
 			ChannelConfig: "/home/fabric-samples/test-network/channel-artifacts/mychannel.block",
 
@@ -103,27 +110,41 @@ func startService() {
 			return
 		}
 		defer sdk.Close()
-		clientChannelContext := sdk.ChannelContext(Org2UserInfo.ChannelID, fabsdk.WithUser(Org2UserInfo.UserName), fabsdk.WithOrg(Org2UserInfo.OrgName))
-		channelClient, err := channel.New(clientChannelContext)
+		client1ChannelContext := sdk.ChannelContext(Org2User1Info.ChannelID, fabsdk.WithUser(Org2User1Info.UserName), fabsdk.WithOrg(Org2User1Info.OrgName))
+		channelClient1, err := channel.New(client1ChannelContext)
 		if err != nil {
 			fmt.Println(err.Error())
 			return
 		}
-		eventClient, err := event.New(clientChannelContext, event.WithBlockEvents(), event.WithSeekType(seek.Newest))
+
+		eventClient1, err := event.New(client1ChannelContext, event.WithBlockEvents(), event.WithSeekType(seek.Newest))
 		if err != nil {
 			fmt.Println(err.Error())
 			return
 		}
+
 		client1ServiceSetup := fabricSDK.ServiceSetup{
-			ChaincodeID:   Org2UserInfo.ChaincodeID,
-			ChannelClient: channelClient,
-			EventClient:   eventClient,
+			ChaincodeID:   Org2User1Info.ChaincodeID,
+			ChannelClient: channelClient1,
+			EventClient:   eventClient1,
 		}
-		client1ServiceSetup.Transfer(to, value)
+
+		tranMsg, err := client1ServiceSetup.Transfer(to, value)
+		if err != nil {
+			fmt.Println(err.Error())
+		} else {
+			fmt.Println("转账成功，交易编号为：" + tranMsg)
+		}
+
+		balance, err := client1ServiceSetup.ClientAccountBalance()
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
 		c.HTML(http.StatusOK, "transfer.html", gin.H{
 			"token1": ethSDK.GetUserBalance("/home/eth-poa/signer1/data/geth.ipc", "0xD78d66C33933a05c57c503d61667918f95cee351", "0x416b1e5329Bd97BB704866bD489747b26848fA42"),
-			"token2": client1ServiceSetup.ClientAccountBalance(),
+			"token2": balance,
 		})
 	})
-	r.Run(":8080")
+	r.Run(":9090")
 }
