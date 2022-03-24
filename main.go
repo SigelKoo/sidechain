@@ -14,6 +14,6 @@ func main() {
 	var wg sync.WaitGroup
 	wg.Add(2)
 	go ethfabricListen.Eth_listen_erc20_transfer("/home/eth-poa/signer1/data/geth.ipc", "0xD78d66C33933a05c57c503d61667918f95cee351", wg.Done)
+	go ethfabricListen.Fabric_listen_erc20_transfer(wg.Done)
 	wg.Wait()
-	// fabricSDK.GetBlockNumber()
 }

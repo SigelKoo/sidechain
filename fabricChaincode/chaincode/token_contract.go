@@ -113,6 +113,76 @@ func (s *SmartContract) Mint(ctx contractapi.TransactionContextInterface, amount
 // Burn redeems tokens the minter's account balance
 // This function triggers a Transfer event
 func (s *SmartContract) Burn(ctx contractapi.TransactionContextInterface, amount int) error {
+	// Get ID of submitting client identity
+	clientID, err := ctx.GetClientIdentity().GetID()
+	if err != nil {
+		return fmt.Errorf("failed to get client id: %v", err)
+	}
+
+	if amount <= 0 {
+		return errors.New("burn amount must be a positive integer")
+	}
+
+	currentBalanceBytes, err := ctx.GetStub().GetState(clientID)
+	if err != nil {
+		return fmt.Errorf("failed to read burner account %s from world state: %v", clientID, err)
+	}
+
+	var currentBalance int
+
+	// Check if minter current balance exists
+	if currentBalanceBytes == nil {
+		return errors.New("The balance does not exist")
+	}
+
+	currentBalance, _ = strconv.Atoi(string(currentBalanceBytes)) // Error handling not needed since Itoa() was used when setting the account balance, guaranteeing it was an integer.
+
+	updatedBalance := currentBalance - amount
+
+	err = ctx.GetStub().PutState(clientID, []byte(strconv.Itoa(updatedBalance)))
+	if err != nil {
+		return err
+	}
+
+	// Update the totalSupply
+	totalSupplyBytes, err := ctx.GetStub().GetState(totalSupplyKey)
+	if err != nil {
+		return fmt.Errorf("failed to retrieve total token supply: %v", err)
+	}
+
+	// If no tokens have been minted, throw error
+	if totalSupplyBytes == nil {
+		return errors.New("totalSupply does not exist")
+	}
+
+	totalSupply, _ := strconv.Atoi(string(totalSupplyBytes)) // Error handling not needed since Itoa() was used when setting the totalSupply, guaranteeing it was an integer.
+
+	// Subtract the burn amount to the total supply and update the state
+	totalSupply -= amount
+	err = ctx.GetStub().PutState(totalSupplyKey, []byte(strconv.Itoa(totalSupply)))
+	if err != nil {
+		return err
+	}
+
+	// Emit the Transfer event
+	transferEvent := event{clientID, "0x0", amount}
+	transferEventJSON, err := json.Marshal(transferEvent)
+	if err != nil {
+		return fmt.Errorf("failed to obtain JSON encoding: %v", err)
+	}
+	err = ctx.GetStub().SetEvent("Burn", transferEventJSON)
+	if err != nil {
+		return fmt.Errorf("failed to set event: %v", err)
+	}
+
+	log.Printf("burner account %s balance updated from %d to %d", clientID, currentBalance, updatedBalance)
+
+	return nil
+}
+
+// Burn redeems tokens the minter's account balance
+// This function triggers a Transfer event
+/*func (s *SmartContract) Burn(ctx contractapi.TransactionContextInterface, amount int) error {
 
 	// Check minter authorization - this sample assumes Org1 is the central banker with privilege to burn new tokens
 	clientMSPID, err := ctx.GetClientIdentity().GetMSPID()
@@ -188,7 +258,7 @@ func (s *SmartContract) Burn(ctx contractapi.TransactionContextInterface, amount
 	log.Printf("minter account %s balance updated from %d to %d", minter, currentBalance, updatedBalance)
 
 	return nil
-}
+}*/
 
 // Transfer transfers tokens from client account to recipient account
 // recipient account must be a valid clientID as returned by the ClientID() function

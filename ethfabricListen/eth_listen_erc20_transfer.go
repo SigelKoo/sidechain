@@ -34,7 +34,6 @@ func (lt *LogTransfer) string() string {
 	return lt.From.Hex() + "," + lt.To.Hex() + "," + lt.Value.String()
 }
 
-// 监听事件日志
 func Eth_listen_erc20_transfer(url string, address string, done func()) {
 	defer done()
 	client, err := ethclient.Dial(url)
