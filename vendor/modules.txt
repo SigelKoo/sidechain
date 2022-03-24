@@ -91,6 +91,16 @@ github.com/ethereum/go-ethereum/signer/core/apitypes
 # github.com/fsnotify/fsnotify v1.5.1
 ## explicit; go 1.13
 github.com/fsnotify/fsnotify
+# github.com/gin-contrib/sse v0.1.0
+## explicit; go 1.12
+github.com/gin-contrib/sse
+# github.com/gin-gonic/gin v1.7.7
+## explicit; go 1.13
+github.com/gin-gonic/gin
+github.com/gin-gonic/gin/binding
+github.com/gin-gonic/gin/internal/bytesconv
+github.com/gin-gonic/gin/internal/json
+github.com/gin-gonic/gin/render
 # github.com/go-kit/kit v0.9.0
 ## explicit
 github.com/go-kit/kit/log
@@ -119,6 +129,16 @@ github.com/go-openapi/spec
 # github.com/go-openapi/swag v0.19.5
 ## explicit
 github.com/go-openapi/swag
+# github.com/go-playground/locales v0.13.0
+## explicit; go 1.13
+github.com/go-playground/locales
+github.com/go-playground/locales/currency
+# github.com/go-playground/universal-translator v0.17.0
+## explicit; go 1.13
+github.com/go-playground/universal-translator
+# github.com/go-playground/validator/v10 v10.4.1
+## explicit; go 1.13
+github.com/go-playground/validator/v10
 # github.com/go-stack/stack v1.8.0
 ## explicit
 github.com/go-stack/stack
@@ -385,6 +405,9 @@ github.com/hyperledger/fabric-sdk-go/test/metadata
 # github.com/joho/godotenv v1.3.0
 ## explicit
 github.com/joho/godotenv
+# github.com/json-iterator/go v1.1.10
+## explicit; go 1.12
+github.com/json-iterator/go
 # github.com/klauspost/compress v1.12.3
 ## explicit; go 1.13
 github.com/klauspost/compress/fse
@@ -394,6 +417,9 @@ github.com/klauspost/compress/zstd/internal/xxhash
 # github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515
 ## explicit
 github.com/kr/logfmt
+# github.com/leodido/go-urn v1.2.0
+## explicit; go 1.13
+github.com/leodido/go-urn
 # github.com/magiconair/properties v1.8.1
 ## explicit
 github.com/magiconair/properties
@@ -402,12 +428,21 @@ github.com/magiconair/properties
 github.com/mailru/easyjson/buffer
 github.com/mailru/easyjson/jlexer
 github.com/mailru/easyjson/jwriter
+# github.com/mattn/go-isatty v0.0.12
+## explicit; go 1.12
+github.com/mattn/go-isatty
 # github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369
 ## explicit; go 1.9
 github.com/matttproud/golang_protobuf_extensions/pbutil
 # github.com/mitchellh/mapstructure v1.4.1
 ## explicit; go 1.14
 github.com/mitchellh/mapstructure
+# github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
+## explicit
+github.com/modern-go/concurrent
+# github.com/modern-go/reflect2 v1.0.1
+## explicit
+github.com/modern-go/reflect2
 # github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e
 ## explicit; go 1.12
 # github.com/onsi/ginkgo v1.16.4
@@ -495,6 +530,9 @@ github.com/tklauser/go-sysconf
 # github.com/tklauser/numcpus v0.2.2
 ## explicit; go 1.11
 github.com/tklauser/numcpus
+# github.com/ugorji/go/codec v1.1.7
+## explicit
+github.com/ugorji/go/codec
 # github.com/weppos/publicsuffix-go v0.5.0
 ## explicit
 github.com/weppos/publicsuffix-go/publicsuffix

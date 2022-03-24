@@ -16,6 +16,5 @@ func SetupSDK(ConfigFile string, initialized bool) (*fabsdk.FabricSDK, error) {
 		return nil, fmt.Errorf("实例化Fabric SDK失败: %v", err)
 	}
 
-	fmt.Println("Fabric SDK初始化成功")
 	return sdk, nil
 }

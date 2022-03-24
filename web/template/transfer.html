@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>侧链操作</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="css/form-validation.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="py-5 text-center"></div>
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">资产列表</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">主链Token数量</h6>
+                        <small class="text-muted">Ethereum</small>
+                    </div>
+                    <span class="text-muted">{{.token1}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">侧链Token数量</h6>
+                        <small class="text-muted">Hyperlegder Fabric</small>
+                    </div>
+                    <span class="text-muted">{{.token2}}</span>
+                </li>
+            </ul>
+
+            <form class="card p-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Transaction Hash">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <form action="/transfer" method="post" navalidate autocomplete="off">
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">侧链转账</h4>
+                <div class="mb-3">
+                    <label for="to">Token接收者</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">To:</span>
+                        </div>
+                        <input type="text" class="form-control" id="to" placeholder="address" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Address is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="value">Token转账数量</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Value:</span>
+                        </div>
+                        <input type="text" class="form-control" id="value" placeholder="value" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Value is required.
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">转账</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+<script src="js/form-validation.js"></script>
+</body>
+</html>
