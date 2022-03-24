@@ -1,10 +1,12 @@
 package ethfabricListen
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
+	"sidechain/ethSDK"
 	"sidechain/fabricSDK"
 	"strconv"
 	"time"
@@ -49,13 +51,13 @@ func Fabric_listen_erc20_transfer(done func()) {
 	channelProvider := sdk.ChannelContext(Org1UserInfo.ChannelID, fabsdk.WithUser(Org1UserInfo.UserName), fabsdk.WithOrg(Org1UserInfo.OrgName))
 	ec, err := event.New(channelProvider, event.WithBlockEvents(), event.WithSeekType(seek.Newest))
 	if err != nil {
-		log.Fatal("failed to create fabcli, error: %v", err)
+		log.Fatalf("failed to create fabcli, error: %v", err)
 	}
 
 	registration, notifier, err := ec.RegisterChaincodeEvent(Org1UserInfo.ChaincodeID, "Burn")
 
 	if err != nil {
-		log.Fatal("failed to register chaincode event, error: %v", err)
+		log.Fatalf("failed to register chaincode event, error: %v", err)
 	}
 
 	defer ec.Unregister(registration)
@@ -76,7 +78,12 @@ func Fabric_listen_erc20_transfer(done func()) {
 				fmt.Printf("To: %s\n", ent.To)
 				fmt.Printf("Value: %d\n", ent.Value)
 				sigandver(ent.string())
-				//fmt.Println("转账成功，交易编号为：", ethSDK.Transfer("HTTP://127.0.0.1:8501", "0xD78d66C33933a05c57c503d61667918f95cee351", "8c7ee582167250ee80c52d813f1747592e78c6c311d3576fa15570662b63dd74", fabricSDK.GetX509UserName(ent.From), strconv.Itoa(ent.Value)))
+				fromDec, err := base64.StdEncoding.DecodeString(ent.From)
+				if err != nil {
+					fmt.Println("*********************************************************")
+					log.Fatalf("Burn From解析失败：%s", err)
+				}
+				fmt.Println("转账成功，交易编号为：", ethSDK.Transfer("HTTP://127.0.0.1:8501", "0xD78d66C33933a05c57c503d61667918f95cee351", "8c7ee582167250ee80c52d813f1747592e78c6c311d3576fa15570662b63dd74", fabricSDK.GetX509UserName(string(fromDec)), strconv.Itoa(ent.Value)))
 			}
 		case <-time.After(time.Second * 5):
 		}
