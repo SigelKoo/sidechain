@@ -58,7 +58,7 @@ organizations:
     users:
       minter:
         key:
-          path: /home/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/minter@org1.example.com/msp/keystore/7b3b93e02aefb476ff6d25a1aa2de531289bb4367e499d3695dd841cb2e31f3b_sk
+          path: /home/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/minter@org1.example.com/msp/keystore/3edc9bdc711b698d068535ef66097a602f5316dae51e4a2766f6ccc945f3a72f_sk
         cert:
           path: /home/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/minter@org1.example.com/msp/signcerts/cert.pem
     certificateAuthorities:
@@ -72,12 +72,12 @@ organizations:
     users:
       0x416b1e5329Bd97BB704866bD489747b26848fA42:
         key:
-          path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0x416b1e5329Bd97BB704866bD489747b26848fA42@org2.example.com/msp/keystore/bda197a43e90a6062c3f276417c72cb4efbdaee576fac42da45db4d7d5dceb17_sk
+          path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0x416b1e5329Bd97BB704866bD489747b26848fA42@org2.example.com/msp/keystore/cfdb64c6eeaedba1d4203d155ea36aaaf4ae06753e0a496298928aea7db5456a_sk
         cert:
           path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0x416b1e5329Bd97BB704866bD489747b26848fA42@org2.example.com/msp/signcerts/cert.pem
       0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c:
         key:
-          path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com/msp/keystore/554aa4763e16f0acf0e9bd4fb11c6d892473d515b4ff46e94214252eacce62a3_sk
+          path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com/msp/keystore/ec91230f204cbad0f4bf62ffcb1212a61d7c4932bc8c1b0e251e1ad67a3584a0_sk
         cert:
           path: /home/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/0xb1ABb29CC3CD7b6c8D028866c370f92A2D1c870c@org2.example.com/msp/signcerts/cert.pem
     certificateAuthorities:
