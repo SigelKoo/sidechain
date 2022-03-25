@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>侧链转账</title>
+    <title>侧链毁币</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -72,22 +72,10 @@
             </div>
         </div>
         <div class="col-md-8 order-md-1">
-            <form action="/transfer" method="post" navalidate autocomplete="off">
-                <h4 class="mb-3">侧链转账</h4>
+            <form action="/burn" method="post" navalidate autocomplete="off">
+                <h4 class="mb-3">侧链毁币</h4>
                 <div class="mb-3">
-                    <label for="to">Token接收者</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">To:</span>
-                        </div>
-                        <input type="text" class="form-control" name="to" id="to" placeholder="address" required>
-                        <div class="invalid-feedback" style="width: 100%;">
-                            Address is required.
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="value">Token转账数量</label>
+                    <label for="value">Token毁币数量</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Value:</span>
@@ -99,7 +87,7 @@
                     </div>
                 </div>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">转账</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">销毁</button>
             </form>
         </div>
     </div>
